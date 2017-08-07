@@ -9,18 +9,21 @@ class Map :
 
 
     """
-    def __init__(self, sX, sY):
+    def __init__(self, sX, sY, l=0):
         self.sizeX = sX
         self.sizeY = sY
+        self.outX = random.randint(0,sX)
+        self.outY = random.randint(0,sY)
+        self.lvl = l
         self.map = [] #Cette liste contiendra ma map en 2D
         for i in range(self.sizeY):
-            self.map.append([0] * self.sizeX)
-
+            self.map.append(['.'] * self.sizeX)
+        self.setCell(self.outX, self.outY, 'o')
     def display(self):
         for i in range (0,self.sizeY):
             l = "|"
             for j in range(0,self.sizeX):
-                l=l+str(self.map[i][j])+","
+                l=l+str(self.map[i][j])+" "
             l = l[0:len(l)-1] + "|"
             print(l)
 
@@ -32,6 +35,7 @@ class Map :
             return 0
         else:
             return -1
+
 
 
 # tests

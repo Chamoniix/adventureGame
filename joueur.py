@@ -7,7 +7,7 @@ class Joueur:
         self.name = input("Entrez votre nom : ")
         self.x = 0
         self.y = 0
-        self.map = Map()
+        self.map = Map(20, 20)
         self.map.setCell(self.x, self.y,'x')
     def display(self):
         print("Joueur : ", self.name)
@@ -16,7 +16,7 @@ class Joueur:
         self.map.display()
 
     def moove(self, dir):
-        self.map.setCell(self.x,self.y,0)
+        self.map.setCell(self.x,self.y,'.')
         inix = self.x
         iniy = self.y
         if dir == "n":
@@ -37,6 +37,12 @@ class Joueur:
             return -1
         else:
             return 0
+
+    def isOut(self):
+        if self.x == self.map.outX and self.y == self.map.outY:
+            return 0
+        else:
+            return -1
 
 # tests
 if __name__ == "__main__":
