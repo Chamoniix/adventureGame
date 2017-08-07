@@ -19,13 +19,6 @@ class Map :
         for i in range(self.sizeY):
             self.map.append(['.'] * self.sizeX)
         self.setCell(self.outX, self.outY, 'o')
-    def display(self):
-        for i in range (0,self.sizeY):
-            l = "|"
-            for j in range(0,self.sizeX):
-                l=l+str(self.map[i][j])+" "
-            l = l[0:len(l)-1] + "|"
-            print(l)
 
     def setCell(self, x, y, v):
         """ Permet de definir la valeur de la cellule [x][y]

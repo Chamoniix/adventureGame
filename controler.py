@@ -11,7 +11,16 @@ res = v.menu()
 if res == "1":
     nom, diff = v.createJoueur()
     j = Joueur(nom, diff)
+
+quit = False
+while (quit == False):
+    clear()
     v.displayJoueur(j)
+    v.displayMap(j)
+    v.displayInfoCell(j)
+    instruct = v.getInstruct()
+    err = j.act(instruct)
+    v.setErr(err)
 
 
 

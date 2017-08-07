@@ -12,16 +12,33 @@ class Joueur:
         self.experience = 0
         self.x = 0
         self.y = 0
-        self.map = Map(20, 20)
+        if diff == 1 :
+            self.mapSize = 10
+        elif diff == 2:
+            self.mapSize = 15
+        elif diff == 3:
+            self.mapSize = 20
+        self.map = Map(self.mapSize, self.mapSize)
         self.map.setCell(self.x, self.y,'x')
-    def display(self):
-        print("Joueur : ", self.name)
-        print("  Position : ", self.x ,",", self.y)
-        print("  map : ")
-        self.map.display()
 
+    def act(self, instruct):
+        if instruct == 'n' or instruct == 's' or instruct == 'e' or instruct == 'w':
+            res = self.moove(instruct)
+        elif instruct == 'd':
+            self.down()
+            res = 0
+        return res
+
+    def down(self):
+        del self.map
+        self.map = Map(10,10)
+        self.map.setCell(self.x, self.y,'x')
+        self.map.lvl -= 1
     def moove(self, dir):
-        self.map.setCell(self.x,self.y,'.')
+        if (self.isOut() == 0):
+            self.map.setCell(self.x,self.y,'o')
+        else:
+            self.map.setCell(self.x,self.y,'.')
         inix = self.x
         iniy = self.y
         if dir == "n":
@@ -33,7 +50,7 @@ class Joueur:
         elif dir == "w":
             self.x -= 1
         else:
-            print ("n,s,e,w")
+            return -1
         res = self.map.setCell(self.x,self.y,'x')
         if res < 0:
             self.x = inix
