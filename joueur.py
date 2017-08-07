@@ -3,8 +3,13 @@
 from map import *
 
 class Joueur:
-    def __init__(self):
-        self.name = input("Entrez votre nom : ")
+    def __init__(self, nom, diff):
+        self.name = nom
+        self.hpMax = 100
+        self.hp = 100
+        self.attack = 10
+        self.niveau = 1
+        self.experience = 0
         self.x = 0
         self.y = 0
         self.map = Map(20, 20)

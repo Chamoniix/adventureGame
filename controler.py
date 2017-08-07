@@ -1,11 +1,22 @@
 # -*-coding:Latin-1 -*
 
 from joueur import *
+from view import *
 import os
 
-j = Joueur()
-j.display()
-res = 2
+v = View()
+clear()
+res = v.menu()
+
+if res == "1":
+    nom, diff = v.createJoueur()
+    j = Joueur(nom, diff)
+    v.displayJoueur(j)
+
+
+
+
+"""
 while 1 :
     clear()
     j.map.display()
@@ -21,3 +32,4 @@ while 1 :
         print("OUT")
 
     res = j.moove(input("Quelle direction ? "))
+"""
