@@ -12,8 +12,8 @@ class Map :
     def __init__(self, sX, sY, l=0):
         self.sizeX = sX
         self.sizeY = sY
-        self.outX = random.randint(0,sX)
-        self.outY = random.randint(0,sY)
+        self.outX = random.randint(0,sX-1)
+        self.outY = random.randint(0,sY-1)
         self.lvl = l
         self.map = [] #Cette liste contiendra ma map en 2D
         for i in range(self.sizeY):

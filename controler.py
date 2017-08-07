@@ -14,7 +14,6 @@ if res == "1":
 
 quit = False
 while (quit == False):
-    clear()
     v.displayJoueur(j)
     v.displayMap(j)
     v.displayInfoCell(j)
