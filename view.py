@@ -7,7 +7,7 @@ class View:
 
     def __init__(self):
         self.err = ""
-        self.cmd = ['n', 's', 'e', 'w', 'd', 'i']
+        self.cmd = ['n', 's', 'e', 'w', 'd', 'i', 't', 'h']
 
 
     def menu(self):
@@ -41,7 +41,7 @@ class View:
         for i in range (0,j.map.sizeY):
             l = "|"
             for k in range(0,j.map.sizeX):
-                if (abs(j.x - k) + abs((j.map.sizeY-1 - j.y) - i)) < 3:
+                if (abs(j.x - k) + abs((j.map.sizeY-1 - j.y) - i)) < j.light or 1:
                     l=l+str(j.map.map[i][k])+" "
                 else:
                     l=l+"  "
@@ -66,7 +66,10 @@ class View:
         while (1):
             act = input("Que voulez vous faire ?")
             if act in self.cmd:
-                return act
+                if act == 'h':
+                    self.displayHelp()
+                else:
+                    return act
             else:
                 print("Unknown Command")
 
@@ -76,5 +79,17 @@ class View:
             self.err = "YOU CAN'T GO THIS WAY"
         elif error == -2:
             self.err = "YOU CAN'T GO DOWN"
+        elif error -3:
+            self.err = "THERE IS NOTHING TO TAKE"
         elif error == 0:
             self.err = ""
+
+    def displayHelp(self):
+        print("\nHELP : ")
+        print("    + n : North")
+        print("    + s : South")
+        print("    + e : East")
+        print("    + w : West")
+        print("    + d : Down")
+        print("    + t : Take")
+        print("    + h : Help")

@@ -13,6 +13,7 @@ class Joueur:
         self.x = 0
         self.y = 0
         self.mapSize = 10
+        self.light = 3
         self.map = Map(self.mapSize, self.mapSize)
         self.map.setCell(self.x, self.y,'x')
         if diff == 1:
@@ -27,6 +28,8 @@ class Joueur:
             res = self.moove(instruct)
         elif instruct == 'd':
             res = self.down()
+        elif instruct == 't':
+            res = self.take()
         return res
 
     def down(self):
@@ -70,8 +73,20 @@ class Joueur:
         else:
             return 0
 
+    def take(self):
+        if self.isOnObj():
+            return -3
+        else:
+            print("")
+
     def isOut(self):
         if self.x == self.map.outX and self.y == self.map.outY:
+            return 0
+        else:
+            return -1
+
+    def isOnObj(self):
+        if self.x == self.map.objX and self.y == self.map.objY:
             return 0
         else:
             return -1
