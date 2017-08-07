@@ -57,6 +57,8 @@ class View:
         print ("> Vous etes en ", j.x, ",", j.y)
         if (j.isOut() == 0):
             print ("> Il y a un trou !")
+        elif (j.isOnObj() == 0):
+            print ("> Il y a un Objet !")
         elif (j.map.map[j.x][j.y] == '.'):
             print ("> il n'y a rien sur cette case")
 
@@ -79,13 +81,14 @@ class View:
             self.err = "YOU CAN'T GO THIS WAY"
         elif error == -2:
             self.err = "YOU CAN'T GO DOWN"
-        elif error -3:
+        elif error == -3:
             self.err = "THERE IS NOTHING TO TAKE"
         elif error == 0:
             self.err = ""
 
     def displayHelp(self):
         print("\nHELP : ")
+        print("Commands :")
         print("    + n : North")
         print("    + s : South")
         print("    + e : East")
@@ -93,3 +96,8 @@ class View:
         print("    + d : Down")
         print("    + t : Take")
         print("    + h : Help")
+        print("Objects : ")
+        print("    + . : Nothing")
+        print("    + o : Hole")
+        print("    + # : Object")
+        print("    + @ : Ennemy")

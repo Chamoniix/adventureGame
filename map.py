@@ -1,8 +1,7 @@
 # -*-coding:Latin-1 -*
 
-import random
-import os
-clear = lambda: os.system('cls')
+from object import *
+
 
 class Map :
     """Class Map defined by :
@@ -14,14 +13,14 @@ class Map :
         self.sizeY = sY
         self.outX = random.randint(0,sX-1)
         self.outY = random.randint(0,sY-1)
-        self.objX = random.randint(0,sX-1)
-        self.objY = random.randint(0,sY-1)
         self.lvl = l
         self.map = [] #Cette liste contiendra ma map en 2D
         for i in range(self.sizeY):
             self.map.append(['.'] * self.sizeX)
+        self.obj = Object(self.map)
         self.setCell(self.outX, self.outY, 'o')
-        self.setCell(self.objX, self.objY, '#')
+        self.setCell(self.obj.x, self.obj.y, '#')
+
 
     def setCell(self, x, y, v):
         """ Permet de definir la valeur de la cellule [x][y]

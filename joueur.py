@@ -50,6 +50,8 @@ class Joueur:
     def moove(self, dir):
         if (self.isOut() == 0):
             self.map.setCell(self.x,self.y,'o')
+        elif (self.isOnObj() == 0):
+            self.map.setCell(self.x,self.y,'#')
         else:
             self.map.setCell(self.x,self.y,'.')
         inix = self.x
@@ -77,7 +79,8 @@ class Joueur:
         if self.isOnObj():
             return -3
         else:
-            print("")
+            print (self.map.obj.nom)
+            input("")
 
     def isOut(self):
         if self.x == self.map.outX and self.y == self.map.outY:
@@ -86,7 +89,7 @@ class Joueur:
             return -1
 
     def isOnObj(self):
-        if self.x == self.map.objX and self.y == self.map.objY:
+        if self.x == self.map.obj.x and self.y == self.map.obj.y:
             return 0
         else:
             return -1
