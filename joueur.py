@@ -11,6 +11,7 @@ class Joueur:
         self.attack = 10
         self.niveau = 1
         self.experience = 0
+        self.upMsg = ""
         self.xpNeed = 10
         self.x = 0
         self.y = 0
@@ -119,12 +120,15 @@ class Joueur:
     def testExp(self):
         if self.experience > self.xpNeed :
             self.niveau += 1
-            self.hp += random.randint(2,8)
-            self.hpMax += random.randint(2,8)
-            self.attack += random.randint(2,8)
+            hp = random.randint(2,8)
+            self.hp += hp
+            self.hpMax += hp
+            atk = random.randint(2,8)
+            self.attack += atk
             if self.niveau == 5 :
                 self.light += 1
             self.xpNeed = 2 * math.pow(2, self.niveau-1) * 10
+            self.upMsg = "> LEVEL UP ! HP +" + str(hp) + ", ATK +" + str(atk)
 
 
     def isOut(self):

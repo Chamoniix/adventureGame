@@ -43,7 +43,7 @@ class View:
         for i in range (0,j.map.size.y):
             l = "|"
             for k in range(0,j.map.size.x):
-                if (abs(j.x - k) + abs((j.map.size.y-1 - j.y) - i)) < j.light or 1 :
+                if (abs(j.x - k) + abs((j.map.size.y-1 - j.y) - i)) < j.light: #or 1 :
                     l=l+str(j.map.map[i][k])+" "
                 else:
                     l=l+"  "
@@ -57,8 +57,8 @@ class View:
     def displayInfoCell(self, j, msg=""):
         print (self.err)
         print ("> Vous etes en ", j.x, ",", j.y)
-        if msg == "LVLUP" :
-            print("> LEVEL UP ! HP+, ATK+, DEF+")
+        if msg[0:12] == "> LEVEL UP !" :
+            print(msg)
         if (j.isOut() == 0):
             print ("> Il y a un trou !")
         elif (j.isOnObj() == 0):
