@@ -29,6 +29,9 @@ while (quit == False):
 
 
 
+
+
+
 """
 while 1 :
     clear()

@@ -100,8 +100,10 @@ class View:
             self.err = "YOU CAN'T GO DOWN"
         elif error == -3:
             self.err = "THERE IS NOTHING TO TAKE"
-        elif error == 0 and not len(msg)==0:
-            self.obj = msg[1:len(msg)]
+        elif error == 0 and msg[0:2] == "OBJ":
+            self.obj = msg[3:len(msg)]
+        elif error == -4:
+            self.err = "Ennemy ! " + msg
         elif error == 0:
             self.err = ""
 
