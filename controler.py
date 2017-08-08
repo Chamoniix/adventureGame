@@ -18,8 +18,9 @@ while (quit == False):
     v.displayMap(j)
     v.displayInfoCell(j)
     instruct = v.getInstruct()
-    err = j.act(instruct)
-    v.setErr(err)
+    msg = ""
+    err,msg = j.act(instruct)
+    v.setErr(err, msg)
 
 
 

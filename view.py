@@ -7,6 +7,7 @@ class View:
 
     def __init__(self):
         self.err = ""
+        self.obj = ""
         self.cmd = ['n', 's', 'e', 'w', 'd', 'i', 't', 'h']
 
 
@@ -36,12 +37,13 @@ class View:
         print ("  + Attack     : ", j.attack)
         print ("  + Niveau     : ", j.niveau)
         print ("  + Experience : ", j.experience)
+        print ("  + Inventaire : ", j.objs)
 
     def displayMap(self, j):
         for i in range (0,j.map.sizeY):
             l = "|"
             for k in range(0,j.map.sizeX):
-                if (abs(j.x - k) + abs((j.map.sizeY-1 - j.y) - i)) < j.light or 1:
+                if (abs(j.x - k) + abs((j.map.sizeY-1 - j.y) - i)) < j.light or 1 :
                     l=l+str(j.map.map[i][k])+" "
                 else:
                     l=l+"  "
@@ -59,9 +61,11 @@ class View:
             print ("> Il y a un trou !")
         elif (j.isOnObj() == 0):
             print ("> Il y a un Objet !")
+        elif (not self.obj==""):
+            print ( "> Vous avez recupere " + self.obj)
+            self.obj = ""
         elif (j.map.map[j.x][j.y] == '.'):
             print ("> il n'y a rien sur cette case")
-
 
     def getInstruct(self):
         print("")
@@ -76,13 +80,15 @@ class View:
                 print("Unknown Command")
 
 
-    def setErr(self, error):
+    def setErr(self, error, msg = ""):
         if error == -1:
             self.err = "YOU CAN'T GO THIS WAY"
         elif error == -2:
             self.err = "YOU CAN'T GO DOWN"
         elif error == -3:
             self.err = "THERE IS NOTHING TO TAKE"
+        elif error == 0 and not len(msg)==0:
+            self.obj = msg[1:len(msg)]
         elif error == 0:
             self.err = ""
 
@@ -96,8 +102,13 @@ class View:
         print("    + d : Down")
         print("    + t : Take")
         print("    + h : Help")
-        print("Objects : ")
+        print("Map : ")
         print("    + . : Nothing")
         print("    + o : Hole")
         print("    + # : Object")
         print("    + @ : Ennemy")
+        print("Objects : ")
+        print("    + Torch  : +1 Light")
+        print("    + Sword  : +10 attack")
+        print("    + Rock   : +5 attack")
+        print("    + Armor  : +10 hp")

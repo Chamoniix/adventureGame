@@ -22,15 +22,17 @@ class Joueur:
             self.diff = "Moyen"
         elif diff == 3:
             self.diff = "Dur"
+        self.objs = []
 
     def act(self, instruct):
+        msg = ""
         if instruct == 'n' or instruct == 's' or instruct == 'e' or instruct == 'w':
             res = self.moove(instruct)
         elif instruct == 'd':
             res = self.down()
         elif instruct == 't':
-            res = self.take()
-        return res
+            res, msg = self.take()
+        return res, msg
 
     def down(self):
         if self.isOut() == 0:
@@ -79,8 +81,27 @@ class Joueur:
         if self.isOnObj():
             return -3
         else:
-            print (self.map.obj.nom)
-            input("")
+            self.map.obj.x = -1
+            self.map.obj.y = -1
+            nom = self.map.obj.nom
+            self.objs.append(nom)
+            if nom == "Torche":
+                self.light +=1
+            if nom == "Epe":
+                self.attack +=10
+            if nom == "Pierre":
+                self.attack +=5
+            if nom == "Armure":
+                self.hp +=10
+
+            self.experience += 10
+            self.testExp()
+            nom = "O" + nom
+            return 0,nom
+
+    def testExp(self):
+        if self.experience > 10 :
+            self.niveau += 1
 
     def isOut(self):
         if self.x == self.map.outX and self.y == self.map.outY:
