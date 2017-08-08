@@ -88,14 +88,26 @@ class Joueur:
             self.map.obj.y = -1
             nom = self.map.obj.nom
             self.objs.append(nom)
+
             if nom == "Torche":
                 self.light +=1
-            if nom == "Epe":
-                self.attack +=10
-            if nom == "Pierre":
+            if nom == "Fireball":
+                self.light +=3
+            if nom == "Epe en bois":
                 self.attack +=5
-            if nom == "Armure":
+            if nom == "Epe en fer":
+                self.attack +=15
+            if nom == "Epe du demon":
+                self.attack +=50
+            if nom == "Petite Armure":
                 self.hp +=10
+                self.hpMax += 10
+            if nom == "Grosse Armure":
+                self.hp +=25
+                self.hpMax += 25
+            if nom == "Bouclier":
+                self.hp +=20
+                self.hpMax += 20
 
             self.experience += 10
             self.testExp()

@@ -9,6 +9,16 @@ class View:
         self.err = ""
         self.obj = ""
         self.cmd = ['n', 's', 'e', 'w', 'd', 'i', 't', 'h']
+        self.objDef = objects = {"Torche" : "la salle s'eclaire (LIGT +1)",
+        "Fireball" : "Une explosion de lumiere ! (LIGT +3)",
+        "Epe en bois" : "Petite epe mais efficace (ATK +5)",
+        "Epe en fer" : "Une epe digne des plus grands forgerons (ATK +15)",
+        "Epe du demon" : "La legende dit qu'elle est faite depuis la queue du demon... (ATK +50)",
+        "Anneau" : "Un etrange anneau (???)",
+        "Amulette" : "Une etrange amulette (???)",
+        "Petite Armure" : "Une legere armure en cuire, elle vous sauvera des plus petits ennemis (HP +10)",
+        "Grosse Armure" : "Une belle armure de chevalier (HP +25)",
+        "Bouclier" : "Un authentique ecusson de chevalier (HP +20)"}
 
 
     def menu(self):
@@ -65,6 +75,7 @@ class View:
             print ("> Il y a un Objet !")
         elif (not self.obj==""):
             print ( "> Vous avez recupere " + self.obj)
+            print ( ">>> ", self.objDef[self.obj])
             self.obj = ""
         elif (j.map.map[j.x][j.y] == '.'):
             print ("> il n'y a rien sur cette case")
