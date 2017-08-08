@@ -13,10 +13,14 @@ if res == "1":
     j = Joueur(nom, diff)
 
 quit = False
+lvl = 0
 while (quit == False):
+    if not lvl == j.niveau:
+        lvl = j.niveau
+        msg = "LVLUP"
     v.displayJoueur(j)
     v.displayMap(j)
-    v.displayInfoCell(j)
+    v.displayInfoCell(j, msg)
     instruct = v.getInstruct()
     msg = ""
     err,msg = j.act(instruct)

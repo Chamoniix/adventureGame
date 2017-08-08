@@ -19,12 +19,27 @@ class Map :
         self.mobs = []
         self.setCell(self.out.x, self.out.y, 'o')
         self.setCell(self.obj.x, self.obj.y, '#')
-        self.addMob()
 
-    def addMob(self):
-        mob = Mob(self.map)
-        self.setCell(mob.pos.x, mob.pos.y, '@')
-        self.mobs.append(mob)
+        if -l > 0 and -l < 3 :
+            self.addMob(1)
+        elif -l > 5:
+            self.addMob(2)
+        elif -l > 7:
+            self.addMob(3)
+        elif -l > 8:
+            self.addMob(4)
+        elif -l > 9:
+            self.addMob(5)
+        elif -l == 10:
+            self.addMob(8)
+
+
+
+    def addMob(self, nb):
+        for i in range(0,nb):
+            mob = Mob(self.map)
+            self.setCell(mob.pos.x, mob.pos.y, '@')
+            self.mobs.append(mob)
 
 
     def setCell(self, x, y, v):

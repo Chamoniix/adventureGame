@@ -28,7 +28,7 @@ class View:
             diff = int(diff)
             if diff >=0 and diff <=3:
                 break
-        return (nom, 1)
+        return (nom, diff)
 
     def displayJoueur(self, j):
         clear()
@@ -36,7 +36,7 @@ class View:
         print ("  + HP         : ", j.hp, "/", j.hpMax)
         print ("  + Attack     : ", j.attack)
         print ("  + Niveau     : ", j.niveau)
-        print ("  + Experience : ", j.experience)
+        print ("  + Experience : ", j.experience, "/", j.xpNeed)
         print ("  + Inventaire : ", j.objs)
 
     def displayMap(self, j):
@@ -54,9 +54,11 @@ class View:
                 l += "       Difficulty : " + str(j.diff)
             print(l)
 
-    def displayInfoCell(self, j):
+    def displayInfoCell(self, j, msg=""):
         print (self.err)
         print ("> Vous etes en ", j.x, ",", j.y)
+        if msg == "LVLUP" :
+            print("> LEVEL UP ! HP+, ATK+, DEF+")
         if (j.isOut() == 0):
             print ("> Il y a un trou !")
         elif (j.isOnObj() == 0):

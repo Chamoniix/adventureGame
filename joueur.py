@@ -1,6 +1,7 @@
 # -*-coding:Latin-1 -*
 
 from map import *
+import math
 
 class Joueur:
     def __init__(self, nom, diff):
@@ -10,18 +11,21 @@ class Joueur:
         self.attack = 10
         self.niveau = 1
         self.experience = 0
+        self.xpNeed = 10
         self.x = 0
         self.y = 0
-        self.mapSize = 4
         self.light = 3
-        self.map = Map(self.mapSize, self.mapSize)
-        self.map.setCell(self.x, self.y,'x')
         if diff == 1:
             self.diff = "Facile"
+            self.mapSize = 4
         elif diff == 2:
             self.diff = "Moyen"
+            self.mapSize = 7
         elif diff == 3:
             self.diff = "Dur"
+            self.mapSize = 10
+        self.map = Map(self.mapSize, self.mapSize)
+        self.map.setCell(self.x, self.y,'x')
         self.objs = []
 
     def act(self, instruct):
@@ -32,18 +36,15 @@ class Joueur:
             res = self.down()
         elif instruct == 't':
             res, msg = self.take()
-        return res, msg 
+        return res, msg
 
     def down(self):
         if self.isOut() == 0:
             lvl = self.map.lvl
+            self.experience += (-lvl+1) * 4
+            self.testExp()
             del self.map
-            if (lvl > -3):
-                self.map = Map(10 , 10,lvl-1)
-            elif lvl > -6:
-                self.map = Map(15 , 15,lvl-1)
-            else:
-                self.map = Map(20, 20, lvl-1)
+            self.map = Map(self.mapSize - lvl + 1 , self.mapSize - lvl + 1 , lvl-1)
             self.map.setCell(self.x, self.y,'x')
             return 0
         else:
@@ -80,7 +81,7 @@ class Joueur:
 
     def take(self):
         if self.isOnObj():
-            return -3
+            return -3, ""
         else:
             self.map.obj.x = -1
             self.map.obj.y = -1
@@ -116,8 +117,15 @@ class Joueur:
 
 
     def testExp(self):
-        if self.experience > 10 :
+        if self.experience > self.xpNeed :
             self.niveau += 1
+            self.hp += random.randint(2,8)
+            self.hpMax += random.randint(2,8)
+            self.attack += random.randint(2,8)
+            if self.niveau == 5 :
+                self.light += 1
+            self.xpNeed = 2 * math.pow(2, self.niveau-1) * 10
+
 
     def isOut(self):
         if self.x == self.map.out.x and self.y == self.map.out.y:
