@@ -48,7 +48,7 @@ class Joueur:
             del self.map
             self.map = Map(self.mapSize - lvl + 1 , self.mapSize - lvl + 1 , lvl-1)
             self.map.setCell(self.x, self.y,'x')
-            return 0
+            return 2
         else:
             return -2
 
@@ -115,7 +115,7 @@ class Joueur:
             self.experience += 10
             self.testExp()
             nom = "OBJ" + nom
-            return 0,nom
+            return 1,nom
 
     def moveMobs(self):
         for i in range(0,len(self.map.mobs)):
@@ -137,7 +137,7 @@ class Joueur:
             for k in range(0,self.map.size.x):
                 if (abs(self.x - k) + abs((self.map.size.y-1 - self.y) - i)) <= self.agroDist:
                     if self.map.map[i][k] == "@":
-                        msg = str(i) + "," + str(k)
+                        msg = str(k) + "," + str(self.map.size.y-1-i)
                         return 0, msg
         return -1, "No Mob"
 
@@ -154,7 +154,10 @@ class Joueur:
             if self.niveau == 5 :
                 self.light += 1
             self.xpNeed = 2 * math.pow(2, self.niveau-1) * 10
-            self.upMsg = "> LEVEL UP ! HP +" + str(hp) + ", ATK +" + str(atk)
+            self.upMsg = "LEVEL UP ! HP +" + str(hp) + ", ATK +" + str(atk)
+            return 0
+        else:
+            return -1
 
 
     def isOut(self):
