@@ -40,17 +40,17 @@ class View:
         print ("  + Inventaire : ", j.objs)
 
     def displayMap(self, j):
-        for i in range (0,j.map.sizeY):
+        for i in range (0,j.map.size.y):
             l = "|"
-            for k in range(0,j.map.sizeX):
-                if (abs(j.x - k) + abs((j.map.sizeY-1 - j.y) - i)) < j.light or 1 :
+            for k in range(0,j.map.size.x):
+                if (abs(j.x - k) + abs((j.map.size.y-1 - j.y) - i)) < j.light or 1 :
                     l=l+str(j.map.map[i][k])+" "
                 else:
                     l=l+"  "
             l = l[0:len(l)-1] + "|"
-            if (i == math.floor(j.map.sizeY/2)-1):
+            if (i == math.floor(j.map.size.y/2)-1):
                 l += "       Floor : " + str(j.map.lvl)
-            if (i == math.floor(j.map.sizeY/2)):
+            if (i == math.floor(j.map.size.y/2)):
                 l += "       Difficulty : " + str(j.diff)
             print(l)
 

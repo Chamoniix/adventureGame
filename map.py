@@ -1,7 +1,7 @@
 # -*-coding:Latin-1 -*
 
 from object import *
-
+from mob import *
 
 class Map :
     """Class Map defined by :
@@ -9,28 +9,34 @@ class Map :
 
     """
     def __init__(self, sX, sY, l=0):
-        self.sizeX = sX
-        self.sizeY = sY
-        self.outX = random.randint(0,sX-1)
-        self.outY = random.randint(0,sY-1)
+        self.size = Point(sX, sY)
+        self.out = Point(random.randint(0,sX-1), random.randint(0,sY-1))
         self.lvl = l
         self.map = [] #Cette liste contiendra ma map en 2D
-        for i in range(self.sizeY):
-            self.map.append(['.'] * self.sizeX)
+        for i in range(self.size.y):
+            self.map.append(['.'] * self.size.x)
         self.obj = Object(self.map)
-        self.setCell(self.outX, self.outY, 'o')
+        self.mobs = []
+        self.setCell(self.out.x, self.out.y, 'o')
         self.setCell(self.obj.x, self.obj.y, '#')
+        self.addMob()
+
+    def addMob(self):
+        mob = Mob(self.map)
+        self.setCell(mob.pos.x, mob.pos.y, '@')
+        self.mobs.append(mob)
 
 
     def setCell(self, x, y, v):
         """ Permet de definir la valeur de la cellule [x][y]
         et de lui affecter la valeur v """
-        if x >= 0 and x < self.sizeX and y >= 0 and y < self.sizeY:
-            self.map[self.sizeY - 1 - y][x] = v
+        if x >= 0 and x < self.size.x and y >= 0 and y < self.size.y:
+            self.map[self.size.y - 1 - y][x] = v
             return 0
         else:
             return -1
-
+    def getCell(self, x, y):
+        return self.map[self.size.y - 1 - y][x]
 
 
 # tests

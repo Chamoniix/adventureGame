@@ -12,7 +12,7 @@ class Joueur:
         self.experience = 0
         self.x = 0
         self.y = 0
-        self.mapSize = 10
+        self.mapSize = 4
         self.light = 3
         self.map = Map(self.mapSize, self.mapSize)
         self.map.setCell(self.x, self.y,'x')
@@ -32,7 +32,7 @@ class Joueur:
             res = self.down()
         elif instruct == 't':
             res, msg = self.take()
-        return res, msg
+        return res, msg 
 
     def down(self):
         if self.isOut() == 0:
@@ -50,6 +50,7 @@ class Joueur:
             return -2
 
     def moove(self, dir):
+        self.moveMobs()
         if (self.isOut() == 0):
             self.map.setCell(self.x,self.y,'o')
         elif (self.isOnObj() == 0):
@@ -99,12 +100,27 @@ class Joueur:
             nom = "O" + nom
             return 0,nom
 
+    def moveMobs(self):
+        for i in range(0,len(self.map.mobs)):
+            while 1 :
+                x = self.map.mobs[i].pos.x
+                y = self.map.mobs[i].pos.y
+
+                res = self.map.mobs[i].move(self.map)
+                if (not self.map.getCell(self.map.mobs[i].pos.x,self.map.mobs[i].pos.y) == '.') or (res == -1):
+                    self.map.mobs[i].setPos(Point(x,y))
+                else:
+                    self.map.setCell(x, y, '.')
+                    self.map.setCell(self.map.mobs[i].pos.x, self.map.mobs[i].pos.y, '@')
+                    break
+
+
     def testExp(self):
         if self.experience > 10 :
             self.niveau += 1
 
     def isOut(self):
-        if self.x == self.map.outX and self.y == self.map.outY:
+        if self.x == self.map.out.x and self.y == self.map.out.y:
             return 0
         else:
             return -1
