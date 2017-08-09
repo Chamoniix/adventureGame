@@ -2,6 +2,7 @@
 
 from joueur import *
 from view import *
+from fight import *
 import os
 
 v = View()
@@ -55,7 +56,7 @@ while (quit == False):
     if not v.isAgro:
         res,msg,upmsg = j.act(instruct)
     else :
-        pass
+        Fight(j, j.map.mobs[0])
 
 
     """

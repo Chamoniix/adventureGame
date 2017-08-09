@@ -100,7 +100,8 @@ class View:
         print("")
         while (1):
             act = input("Que voulez vous faire ?")
-            act = act[0]
+            if len(act) >0:
+                act = act[0]
             if not self.isAgro:
                 if act in self.cmd:
                     if act == 'h':

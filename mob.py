@@ -6,6 +6,8 @@ import random
 class Mob:
 
     def __init__(self, map):
+        names = ["Gobelin", "rat", "Troll", "Sorcier"]
+        self.name = names[random.randint(0,len(names)-1)]
         self.dir = ["n", "s", "e", "w"]
         self.pos = Point(0,0)
         sX = len(map[:][1])

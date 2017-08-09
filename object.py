@@ -6,11 +6,11 @@ clear = lambda: os.system('cls')
 class Object:
 
     def __init__(self, map):
-        objects = ["Torche", "Fireball",
-                "Epe en bois", "Epe en fer", "Epe du demon",
-                "Anneau", "Amulette",
-                 "Petite Armure", "Grosse Armure", "Bouclier",
-                 "Masque"]
+        objects = ["Torche", "Fireball",                        # LIGHT
+                "Epe en bois", "Epe en fer", "Epe du demon",    # ATTACK
+                "Anneau", "Amulette",                           # ??? Spetials
+                 "Petite Armure", "Grosse Armure", "Bouclier",  # HP
+                 "Masque"]                                      # BAD
         sX = len(map[:][1])
         sY = len(map[1][:])
         self.nom = objects[random.randint(0,len(objects)-1)]
