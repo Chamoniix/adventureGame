@@ -13,19 +13,59 @@ if res == "1":
     j = Joueur(nom, diff)
 
 quit = False
-lvl = 1
+
 while (quit == False):
     msg = ""
-    if not lvl == j.niveau:
-        lvl = j.niveau
-        msg = j.upMsg
+
+    """
+    Display the next frame composed of :
+        + Player status
+        + The map
+        + Info about the Cell
+    """
     v.displayJoueur(j)
     v.displayMap(j)
     v.displayInfoCell(j, msg)
-    instruct = v.getInstruct()
-    err,msg = j.act(instruct)
-    v.setErr(err, msg)
 
+
+    """
+    Get Instruct Ask the next move to the user to verify that any mistakes has been done
+    """
+    instruct = v.getInstruct()
+
+
+    """
+    Every actions on the model are done by act function from Joueur.
+    It return :
+        + A code statu with can identify what happened
+        + A message which can be usefull for display e.g. object name
+
+    Status are made this way : Negative => Error, Positiv => Evemt :
+          0 : No display
+        - 1 : Impossible direction
+        - 2 : Not on the exit, can't use down
+        - 3 : Not on an object, can't use take
+        + 1 : Found an object, display efects
+        + 2 : New floor
+    """
+    res,msg,upmsg = j.act(instruct)
+
+
+    """
+    Sets Errors for next frame display
+    """
+    v.setErr(res, msg)
+
+
+    """
+    Sets Event for next frame display
+    """
+    v.setEvent(res, msg)
+
+    """
+    Display lvl up
+    """
+    v.levelUp(upmsg)
 
 
 

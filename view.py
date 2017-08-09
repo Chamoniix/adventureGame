@@ -7,11 +7,12 @@ class View:
 
     def __init__(self):
         self.err = ""
-        self.obj = ""
+        self.event = ""
+        self.upMsg = ""
         self.cmd = ['n', 's', 'e', 'w', 'd', 'i', 't', 'h']
         self.objDef = objects = {"Torche" : "la salle s'eclaire (LIGT +1)",
         "Fireball" : "Une explosion de lumiere ! (LIGT +3)",
-        "Epe en bois" : "Petite epe mais efficace (ATK +5)",
+        "Epe en bois" : "Petite epe en bois, plus efficace sur scene qu'en combat (ATK +5)",
         "Epe en fer" : "Une epe digne des plus grands forgerons (ATK +15)",
         "Epe du demon" : "La legende dit qu'elle est faite depuis la queue du demon... (ATK +50)",
         "Anneau" : "Un etrange anneau (???)",
@@ -53,7 +54,7 @@ class View:
         for i in range (0,j.map.size.y):
             l = "|"
             for k in range(0,j.map.size.x):
-                if (abs(j.x - k) + abs((j.map.size.y-1 - j.y) - i)) < j.light: #or 1 :
+                if (abs(j.x - k) + abs((j.map.size.y-1 - j.y) - i)) < j.light  or 1 :
                     l=l+str(j.map.map[i][k])+" "
                 else:
                     l=l+"  "
@@ -65,20 +66,26 @@ class View:
             print(l)
 
     def displayInfoCell(self, j, msg=""):
-        print (self.err)
-        print ("> Vous etes en ", j.x, ",", j.y)
-        if msg[0:12] == "> LEVEL UP !" :
-            print(msg)
+        print()
+        ''' Zone affichant l'erreur s'il y en a eu une '''
+        print ("# ", self.err)
+
+        ''' Coordonnees et ce qui se trouve sur la cellule '''
+        print ("+ Vous etes en ", j.x, ",", j.y)
         if (j.isOut() == 0):
-            print ("> Il y a un trou !")
+            print ("+ Il y a un trou !")
         elif (j.isOnObj() == 0):
-            print ("> Il y a un Objet !")
-        elif (not self.obj==""):
-            print ( "> Vous avez recupere " + self.obj)
-            print ( ">>> ", self.objDef[self.obj])
-            self.obj = ""
+            print ("+ Il y a un Objet !")
         elif (j.map.map[j.x][j.y] == '.'):
-            print ("> il n'y a rien sur cette case")
+            print ("+ il n'y a rien sur cette case")
+
+        ''' Affiche les evenements precedents '''
+        print ("> ", self.event)
+
+        ''' Affiche un message si le joueur a gagné un niveau '''
+        if not self.upMsg == "":
+            print ("> ", self.upMsg)
+
 
     def getInstruct(self):
         print("")
@@ -90,7 +97,7 @@ class View:
                 else:
                     return act
             else:
-                print("Unknown Command")
+                print("Unknown Command, 'h' for help")
 
 
     def setErr(self, error, msg = ""):
@@ -100,10 +107,21 @@ class View:
             self.err = "YOU CAN'T GO DOWN"
         elif error == -3:
             self.err = "THERE IS NOTHING TO TAKE"
-        elif error == 0 and not len(msg)==0:
-            self.obj = msg[1:len(msg)]
+        elif error == -4:
+            self.err = "Ennemy ! " + msg
         elif error == 0:
             self.err = ""
+
+    def setEvent(self, event, msg = ""):
+        if event == 1 and msg[0:3] == "OBJ":
+            self.event =  "Vous avez recupere " + msg[3:len(msg)] + "\n>>> " + self.objDef[msg[3:len(msg)]]
+        elif event == 2:
+            self.event = "Vous tombez dans une nouvelle piece"
+        elif event == 0:
+            self.event = ""
+
+    def levelUp(self, msg):
+        self.upMsg = msg
 
     def displayHelp(self):
         print("\nHELP : ")
