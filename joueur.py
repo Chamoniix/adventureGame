@@ -38,13 +38,13 @@ class Joueur:
             res = self.down()
         elif instruct == 't':
             res, msg = self.take()
-        return res, msg
+        self.testExp()
+        return res, msg, self.upMsg
 
     def down(self):
         if self.isOut() == 0:
             lvl = self.map.lvl
             self.experience += (-lvl+1) * 4
-            self.testExp()
             del self.map
             self.map = Map(self.mapSize - lvl + 1 , self.mapSize - lvl + 1 , lvl-1)
             self.map.setCell(self.x, self.y,'x')
@@ -113,13 +113,14 @@ class Joueur:
                 self.hpMax += 20
 
             self.experience += 10
-            self.testExp()
             nom = "OBJ" + nom
             return 1,nom
 
     def moveMobs(self):
         for i in range(0,len(self.map.mobs)):
+            j = 0
             while 1 :
+                j += 1
                 x = self.map.mobs[i].pos.x
                 y = self.map.mobs[i].pos.y
 
@@ -129,6 +130,9 @@ class Joueur:
                 else:
                     self.map.setCell(x, y, '.')
                     self.map.setCell(self.map.mobs[i].pos.x, self.map.mobs[i].pos.y, '@')
+                    break
+                '''200 impossible moves, we can suppose the mob is stuck'''
+                if j > 200:
                     break
 
     def detectMob(self):
@@ -153,10 +157,12 @@ class Joueur:
             self.attack += atk
             if self.niveau == 5 :
                 self.light += 1
+                atk += ", LIGHT +1"
             self.xpNeed = 2 * math.pow(2, self.niveau-1) * 10
             self.upMsg = "LEVEL UP ! HP +" + str(hp) + ", ATK +" + str(atk)
             return 0
         else:
+            self.upMsg= ""
             return -1
 
 

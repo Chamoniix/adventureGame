@@ -8,6 +8,7 @@ class View:
     def __init__(self):
         self.err = ""
         self.event = ""
+        self.upMsg = ""
         self.cmd = ['n', 's', 'e', 'w', 'd', 'i', 't', 'h']
         self.objDef = objects = {"Torche" : "la salle s'eclaire (LIGT +1)",
         "Fireball" : "Une explosion de lumiere ! (LIGT +3)",
@@ -53,7 +54,7 @@ class View:
         for i in range (0,j.map.size.y):
             l = "|"
             for k in range(0,j.map.size.x):
-                if (abs(j.x - k) + abs((j.map.size.y-1 - j.y) - i)) < j.light: #or 1 :
+                if (abs(j.x - k) + abs((j.map.size.y-1 - j.y) - i)) < j.light  or 1 :
                     l=l+str(j.map.map[i][k])+" "
                 else:
                     l=l+"  "
@@ -79,16 +80,11 @@ class View:
             print ("+ il n'y a rien sur cette case")
 
         ''' Affiche les evenements precedents '''
-
         print ("> ", self.event)
-        if msg[0:12] == "> LEVEL UP !" :
-            print(msg)
-        elif (not self.obj==""):
-            print ( "> Vous avez recupere " + self.obj)
-            print ( ">>> ", self.objDef[self.obj])
-            self.obj = ""
-        else :
-            print ("> ")
+
+        ''' Affiche un message si le joueur a gagné un niveau '''
+        if not self.upMsg == "":
+            print ("> ", self.upMsg)
 
 
     def getInstruct(self):
@@ -118,11 +114,14 @@ class View:
 
     def setEvent(self, event, msg = ""):
         if event == 1 and msg[0:3] == "OBJ":
-            self.event =  "Vous avez recupere " + msg[3:len(msg)] + "\n>>> " + objDef[self.obj]
+            self.event =  "Vous avez recupere " + msg[3:len(msg)] + "\n>>> " + self.objDef[msg[3:len(msg)]]
         elif event == 2:
             self.event = "Vous tombez dans une nouvelle piece"
-        elif error == 0:
+        elif event == 0:
             self.event = ""
+
+    def levelUp(self, msg):
+        self.upMsg = msg
 
     def displayHelp(self):
         print("\nHELP : ")

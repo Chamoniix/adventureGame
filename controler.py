@@ -48,8 +48,8 @@ while (quit == False):
         + 1 : Found an object, display efects
         + 2 : New floor
     """
-    res,msg = j.act(instruct)
-    testLvlUp(j)
+    res,msg,upmsg = j.act(instruct)
+
 
     """
     Sets Errors for next frame display
@@ -62,10 +62,12 @@ while (quit == False):
     """
     v.setEvent(res, msg)
 
+    """
+    Display lvl up
+    """
+    v.levelUp(upmsg)
 
 
-    def testLvlUp(self, j):
-        if 
 
 """
 while 1 :
