@@ -9,7 +9,8 @@ class Object:
         objects = ["Torche", "Fireball",
                 "Epe en bois", "Epe en fer", "Epe du demon",
                 "Anneau", "Amulette",
-                 "Petite Armure", "Grosse Armure", "Bouclier"]
+                 "Petite Armure", "Grosse Armure", "Bouclier",
+                 "Masque"]
         sX = len(map[:][1])
         sY = len(map[1][:])
         self.nom = objects[random.randint(0,len(objects)-1)]

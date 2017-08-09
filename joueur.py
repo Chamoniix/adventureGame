@@ -121,6 +121,8 @@ class Joueur:
             if nom == "Bouclier":
                 self.hp +=20
                 self.hpMax += 20
+            if nom == "Masque":
+                self.agroDist +=1
 
             self.experience += 10
             nom = "OBJ" + nom

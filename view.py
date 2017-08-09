@@ -20,7 +20,8 @@ class View:
         "Amulette" : "Une etrange amulette (???)",
         "Petite Armure" : "Une legere armure en cuire, elle vous sauvera des plus petits ennemis (HP +10)",
         "Grosse Armure" : "Une belle armure de chevalier (HP +25)",
-        "Bouclier" : "Un authentique ecusson de chevalier (HP +20)"}
+        "Bouclier" : "Un authentique ecusson de chevalier (HP +20)",
+        "Masque" : "Vous faites peur aux ennemis, ils vous attaquent de plus loin (AGRO +1)"}
 
 
     def menu(self):
@@ -49,7 +50,7 @@ class View:
         print ("  + Attack     : ", j.attack)
         print ("  + Niveau     : ", j.niveau)
         print ("  + Experience : ", j.experience, "/", j.xpNeed)
-        print ("  + Inventaire : ", j.objs)
+        print ("  + Equipement : ", j.objs)
 
     def displayMap(self, j):
         for i in range (0,j.map.size.y):
