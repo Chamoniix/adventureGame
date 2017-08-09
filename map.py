@@ -20,7 +20,9 @@ class Map :
         self.setCell(self.out.x, self.out.y, 'o')
         self.setCell(self.obj.x, self.obj.y, '#')
 
-        if -l > 0 and -l < 3 :
+        if l == 0 :
+            pass
+        elif -l > 0 and -l < 3 :
             self.addMob(1)
         elif  -l < 5 :
             self.addMob(2)

@@ -16,7 +16,7 @@ quit = False
 
 while (quit == False):
     msg = ""
-
+    upmsg = ""
     """
     Display the next frame composed of :
         + Player status
@@ -52,7 +52,10 @@ while (quit == False):
         + 2 : New floor
         + 3 : Mob aggro
     """
-    res,msg,upmsg = j.act(instruct)
+    if not v.isAgro:
+        res,msg,upmsg = j.act(instruct)
+    else :
+        pass
 
 
     """
