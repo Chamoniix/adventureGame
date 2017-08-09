@@ -7,6 +7,7 @@ class View:
 
     def __init__(self):
         self.err = ""
+        self.isAgro = False
         self.event = ""
         self.upMsg = ""
         self.cmd = ['n', 's', 'e', 'w', 'd', 'i', 't', 'h']
@@ -54,7 +55,7 @@ class View:
         for i in range (0,j.map.size.y):
             l = "|"
             for k in range(0,j.map.size.x):
-                if (abs(j.x - k) + abs((j.map.size.y-1 - j.y) - i)) < j.light  or 1 :
+                if (abs(j.x - k) + abs((j.map.size.y-1 - j.y) - i)) < j.light: #  or 1 :
                     l=l+str(j.map.map[i][k])+" "
                 else:
                     l=l+"  "
@@ -86,6 +87,13 @@ class View:
         if not self.upMsg == "":
             print ("> ", self.upMsg)
 
+    def displayAgro(self):
+        print()
+        print("############################################")
+        print("#                                          #")
+        print("#      Un monstre vous agresse !           #")
+        print("#                                          #")
+        print("############################################")
 
     def getInstruct(self):
         print("")
@@ -107,8 +115,6 @@ class View:
             self.err = "YOU CAN'T GO DOWN"
         elif error == -3:
             self.err = "THERE IS NOTHING TO TAKE"
-        elif error == -4:
-            self.err = "Ennemy ! " + msg
         elif error == 0:
             self.err = ""
 
@@ -122,6 +128,9 @@ class View:
 
     def levelUp(self, msg):
         self.upMsg = msg
+
+    def setIsAgro(self, yn):
+        self.isAgro = yn
 
     def displayHelp(self):
         print("\nHELP : ")

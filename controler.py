@@ -25,7 +25,10 @@ while (quit == False):
     """
     v.displayJoueur(j)
     v.displayMap(j)
-    v.displayInfoCell(j, msg)
+    if not v.isAgro:
+        v.displayInfoCell(j, msg)
+    else:
+        v.displayAgro()
 
 
     """
@@ -47,6 +50,7 @@ while (quit == False):
         - 3 : Not on an object, can't use take
         + 1 : Found an object, display efects
         + 2 : New floor
+        + 3 : Mob aggro
     """
     res,msg,upmsg = j.act(instruct)
 
@@ -63,10 +67,14 @@ while (quit == False):
     v.setEvent(res, msg)
 
     """
-    Display lvl up
+    Set lvl up message
     """
     v.levelUp(upmsg)
 
+    if res == 3 :
+        v.setIsAgro(True)
+    else:
+        v.setIsAgro(False)
 
 
 """

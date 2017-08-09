@@ -52,6 +52,13 @@ class Joueur:
         else:
             return -2
 
+
+    '''
+    returns :
+        -1 : You can't move this way
+        +3 : You mooved, and get agro by a mob msg = x,y to identify the mob
+        +0 : You mooved, nothing happened
+    '''
     def moove(self, dir):
         msg = ""
         self.moveMobs()
@@ -80,9 +87,12 @@ class Joueur:
         else:
             res, msg = self.detectMob()
             if res == 0:
-                return -4, msg #Mob found
+                return 3, msg #Mob found
             return 0, "You mooved, no mob"
-
+    ''' returns :
+        -3 : Not on an Object
+        +1 : Took one object, msg = "OBJobjectname"
+    '''
     def take(self):
         if self.isOnObj():
             return -3, ""
@@ -135,6 +145,10 @@ class Joueur:
                 if j > 200:
                     break
 
+    ''' Returns :
+        -1 : No mob
+        +0 : Mob, msg = x,y to identify the mob
+        '''
     def detectMob(self):
         #Go thought all the map and consider only close enought cells
         for i in range (0,self.map.size.y):
@@ -146,7 +160,10 @@ class Joueur:
         return -1, "No Mob"
 
 
-
+    ''' Returns :
+        +0 : LVL UP
+        -1 : same lvl as before
+        '''
     def testExp(self):
         if self.experience > self.xpNeed :
             self.niveau += 1
