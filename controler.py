@@ -57,6 +57,8 @@ while (quit == False):
         res,msg,upmsg = j.act(instruct)
     else :
         Fight(j, j.map.mobs[0])
+        v.isAgro = False
+        # TODO Delete mob
 
 
     """

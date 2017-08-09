@@ -29,6 +29,7 @@ class Joueur:
         self.map = Map(self.mapSize, self.mapSize)
         self.map.setCell(self.x, self.y,'x')
         self.objs = []
+        self.usables = ["Potion", "Steak"]
 
     def act(self, instruct):
         msg = ""

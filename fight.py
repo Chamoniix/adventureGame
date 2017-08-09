@@ -11,4 +11,5 @@ class Fight:
         self.fight()
 
     def fight(self):
-        self.v.displayHeader(self.j.name, self.mob.name)
+        while 1:
+            self.v.displayHeader(self.j, self.mob)
