@@ -56,8 +56,25 @@ while (quit == False):
     if not v.isAgro:
         res,msg,upmsg = j.act(instruct)
     else :
-        Fight(j, j.map.mobs[0])
+        coord = v.event.split(',')
+        v.event = ""
+        mob = None
+        for i in range(len(j.map.mobs)):
+            #print( "Mob n", i, " : " + j.map.mobs[i].name + "en position", j.map.mobs[i].pos.x,",",j.map.mobs[i].pos.y )
+            if j.map.mobs[i].pos.x == int(coord[0]) and j.map.mobs[i].pos.y == int(coord[1]):
+                mob = j.map.mobs[i]
+        f = Fight(j, mob)
+        res = f.fight()
         v.isAgro = False
+        if res == 1 :
+            print("Mob dead")
+            input()
+        if res == 2 :
+            print("Joueur dead")
+            input()
+        if res == 3:
+            print("Both KO")
+            input()
         # TODO Delete mob
 
 
@@ -78,7 +95,7 @@ while (quit == False):
     v.levelUp(upmsg)
 
     if res == 3 :
-        v.setIsAgro(True)
+        v.setIsAgro(True, msg)
     else:
         v.setIsAgro(False)
 

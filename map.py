@@ -45,7 +45,6 @@ class Map :
             self.setCell(mob.pos.x, mob.pos.y, '@')
             self.mobs.append(mob)
 
-
     def setCell(self, x, y, v):
         """ Permet de definir la valeur de la cellule [x][y]
         et de lui affecter la valeur v """

@@ -8,11 +8,11 @@ class Mob:
     def __init__(self, map):
         names = ["Gobelin", "rat", "Troll", "Sorcier"]
         self.name = names[random.randint(0,len(names)-1)]
-        self.hp = 0
-        self.hpMax = 0
-        self.attack = 0
+        self.hp = 100
+        self.hpMax = 100
+        self.attack = 10
         self.experienceReward = 0
-
+        self.precision = 80
 
         self.dir = ["n", "s", "e", "w"]
         self.pos = Point(0,0)

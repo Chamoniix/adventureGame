@@ -144,8 +144,11 @@ class View:
     def levelUp(self, msg):
         self.upMsg = msg
 
-    def setIsAgro(self, yn):
+    def setIsAgro(self, yn,msg=""):
         self.isAgro = yn
+        if yn:
+            self.event = msg
+
 
     def displayHelp(self):
         print("\nHELP : ")

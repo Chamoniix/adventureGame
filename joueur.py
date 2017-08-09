@@ -9,6 +9,7 @@ class Joueur:
         self.hpMax = 100
         self.hp = 100
         self.attack = 10
+        self.precision = 80
         self.niveau = 1
         self.experience = 0
         self.upMsg = ""

@@ -8,6 +8,9 @@ class ViewFight:
 
     def __init__(self):
         self.x = 10
+        self.attackStr1 = ""
+        self.attackStr2 = ""
+        self.msg = ""
 
     def displayHeader(self, j, mob):
         clear()
@@ -36,11 +39,19 @@ class ViewFight:
 
         print ()
         x =+ random.randint(-5,5)
-        stri = "      " + -x* " " + "      (┛ò__ó)┛"+ x* " " +"   ╰(▲__▲)╯"
+        stri = "      " + - x * " " + "      (┛ò__ó)┛"+ x* " " +"   ╰(▲__▲)╯"
         print (stri)
         print ()
+        print ()
+        print (self.attackStr1)
+        print (self.attackStr2)
+        print ()
+        print(self.msg)
+        self.msg = ""
+    def displayCmd(self):
+        act = input ("Press Entre to attack, u to use objects  :  ")
+        return act
 
-
-
-
-        input()
+    def displayHit(self, dmgJ, dmgM, jname, mname):
+        self.attackStr1 = " > " + jname +   " inflige " + str(dmgJ) + " points de degats a " + mname + " !"
+        self.attackStr2 = " > " + mname + " attaque, vous perdez " + str(dmgM) + " points de vie!"
