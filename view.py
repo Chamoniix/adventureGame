@@ -99,13 +99,25 @@ class View:
         print("")
         while (1):
             act = input("Que voulez vous faire ?")
-            if act in self.cmd:
-                if act == 'h':
-                    self.displayHelp()
+            if not self.isAgro:
+                if act in self.cmd:
+                    if act == 'h':
+                        self.displayHelp()
+                    else:
+                        return act
                 else:
-                    return act
+                    print("Unknown Command, 'h' for help")
             else:
-                print("Unknown Command, 'h' for help")
+                if act in ['h', 'f', 'r']:
+                    if act == 'h':
+                        self.displayHelp()
+                    else:
+                        return act
+                else:
+                    if act in self.cmd:
+                        print("This is no time for this...")
+                    else:
+                        print("Unknown Command, 'h' for help")
 
 
     def setErr(self, error, msg = ""):
