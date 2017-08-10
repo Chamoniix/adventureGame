@@ -6,8 +6,8 @@ import math
 class Joueur:
     def __init__(self, nom, diff):
         self.name = nom
-        self.hpMax = 100
-        self.hp = 100
+        self.hpMax = 10000
+        self.hp = 10000
         self.attack = 10
         self.precision = 80
         self.niveau = 1
@@ -133,21 +133,22 @@ class Joueur:
     def moveMobs(self):
         for i in range(0,len(self.map.mobs)):
             j = 0
-            while 1 :
-                j += 1
-                x = self.map.mobs[i].pos.x
-                y = self.map.mobs[i].pos.y
+            if not self.map.mobs[i].isdead:
+                while 1 :
+                    j += 1
+                    x = self.map.mobs[i].pos.x
+                    y = self.map.mobs[i].pos.y
 
-                res = self.map.mobs[i].move(self.map)
-                if (not self.map.getCell(self.map.mobs[i].pos.x,self.map.mobs[i].pos.y) == '.') or (res == -1):
-                    self.map.mobs[i].setPos(Point(x,y))
-                else:
-                    self.map.setCell(x, y, '.')
-                    self.map.setCell(self.map.mobs[i].pos.x, self.map.mobs[i].pos.y, '@')
-                    break
-                '''200 impossible moves, we can suppose the mob is stuck'''
-                if j > 200:
-                    break
+                    res = self.map.mobs[i].move(self.map)
+                    if (not self.map.getCell(self.map.mobs[i].pos.x,self.map.mobs[i].pos.y) == '.') or (res == -1):
+                        self.map.mobs[i].setPos(Point(x,y))
+                    else:
+                        self.map.setCell(x, y, '.')
+                        self.map.setCell(self.map.mobs[i].pos.x, self.map.mobs[i].pos.y, '@')
+                        break
+                    '''200 impossible moves, we can suppose the mob is stuck'''
+                    if j > 200:
+                        break
 
     ''' Returns :
         -1 : No mob
@@ -178,9 +179,9 @@ class Joueur:
             self.attack += atk
             if self.niveau == 5 :
                 self.light += 1
-                atk += ", LIGHT +1"
+                self.upMsg += ", LIGHT +1"
             self.xpNeed = 2 * math.pow(2, self.niveau-1) * 10
-            self.upMsg = "LEVEL UP ! HP +" + str(hp) + ", ATK +" + str(atk)
+            self.upMsg = "LEVEL UP ! HP +" + str(hp) + ", ATK +" + str(self.upMsg)
             return 0
         else:
             self.upMsg= ""

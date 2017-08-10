@@ -67,8 +67,17 @@ while (quit == False):
         res = f.fight()
         v.isAgro = False
         if res == 1 :
-            print("Mob dead")
+            v.displayJoueur(j)
+            v.displayMap(j)
+            v.displayInfoCell(j, msg)
+            print(mob.name, " disparait...")
             input()
+            j.map.setCell(mob.pos.x, mob.pos.y, '.')
+            mob.setPos(Point(-1,-1))
+            mob.isdead = True
+            v.displayJoueur(j)
+            v.displayMap(j)
+            v.displayInfoCell(j, msg)
         if res == 2 :
             print("Joueur dead")
             input()

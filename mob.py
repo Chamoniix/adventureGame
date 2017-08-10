@@ -1,19 +1,25 @@
 # -*-coding:Latin-1 -*
 
 from point import *
+from mobDescriptor import *
 import random
 
 class Mob:
 
     def __init__(self, map):
-        names = ["Gobelin", "rat", "Troll", "Sorcier"]
-        self.name = names[random.randint(0,len(names)-1)]
-        self.hp = 100
-        self.hpMax = 100
-        self.attack = 10
-        self.experienceReward = 0
-        self.precision = 80
-
+        self.isdead = False
+        #name, hpmax, attack, experienceReward, precision
+        mobs = [MobDescriptor("Gobelin", 20, 10, 20, 80),
+        MobDescriptor("rat", 10, 10, 10, 70),
+        MobDescriptor("Troll", 100, 40, 100, 50),
+        MobDescriptor("Sorcier", 30, 35, 50, 80)]
+        i = random.randint(0,len(mobs)-1)
+        self.name = mobs[i].name
+        self.hp = mobs[i].hpMax
+        self.hpMax = mobs[i].hpMax
+        self.attack = mobs[i].attack
+        self.experienceReward = mobs[i].experienceReward
+        self.precision = mobs[i].precision
         self.dir = ["n", "s", "e", "w"]
         self.pos = Point(0,0)
         sX = len(map[:][1])

@@ -26,6 +26,15 @@ class Fight:
                 dmgJ, dmgM = self.attack()
                 res = self.isDead()
                 if not res == 0:
+                    self.v.displayHit(dmgJ, dmgM, self.j.name, self.mob.name)
+                    self.v.displayHeader(self.j, self.mob)
+                    if res == 1:
+                        print (self.mob.name, " is dead.")
+                    elif res == 2:
+                        print (self.j.name, " is dead.")
+                    elif res == 3:
+                        print (self.mob.name, " and ", self.j.name, " are dead.")
+                    input()
                     return res
                 self.v.displayHit(dmgJ, dmgM, self.j.name, self.mob.name)
 
@@ -37,8 +46,8 @@ class Fight:
 
 
     def attack(self):
-        dmgJ = self.j.attack + random.randint(-math.floor(self.j.attack/2),math.floor(self.j.attack/2))
-        dmgM = self.mob.attack + random.randint(-math.floor(self.mob.attack/2),math.floor(self.mob.attack/2))
+        dmgJ = self.j.attack + random.randint(-math.floor(self.j.attack/10),math.floor(self.j.attack/10))
+        dmgM = self.mob.attack + random.randint(-math.floor(self.mob.attack/10),math.floor(self.mob.attack/10))
 
         touche = random.randint(0,100)
         if touche > self.j.precision:
