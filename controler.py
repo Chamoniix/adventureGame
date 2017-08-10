@@ -55,6 +55,8 @@ while (quit == False):
     """
     if not v.isAgro:
         res,msg,upmsg = j.act(instruct)
+        if j.map.lvl == 10:
+            break
     else :
         coord = v.event.split(',')
         v.event = ""
@@ -108,6 +110,7 @@ while (quit == False):
     else:
         v.setIsAgro(False)
 
+v.win()
 
 """
 while 1 :

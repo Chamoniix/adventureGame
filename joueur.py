@@ -6,8 +6,8 @@ import math
 class Joueur:
     def __init__(self, nom, diff):
         self.name = nom
-        self.hpMax = 10000
-        self.hp = 10000
+        self.hpMax = 200
+        self.hp = 200
         self.attack = 10
         self.precision = 80
         self.niveau = 1

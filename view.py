@@ -56,7 +56,7 @@ class View:
         for i in range (0,j.map.size.y):
             l = "|"
             for k in range(0,j.map.size.x):
-                if (abs(j.x - k) + abs((j.map.size.y-1 - j.y) - i)) < j.light  or 1 :
+                if (abs(j.x - k) + abs((j.map.size.y-1 - j.y) - i)) < j.light:#  or 1 :
                     l=l+str(j.map.map[i][k])+" "
                 else:
                     l=l+"  "
@@ -170,3 +170,7 @@ class View:
         print("    + Sword  : +10 attack")
         print("    + Rock   : +5 attack")
         print("    + Armor  : +10 hp")
+
+    def win(self):
+        clear()
+        print("gg")
