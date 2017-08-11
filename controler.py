@@ -58,35 +58,51 @@ while (quit == False):
         if j.map.lvl == 10:
             break
     else :
-        coord = v.event.split(',')
-        v.event = ""
-        mob = None
-        for i in range(len(j.map.mobs)):
-            #print( "Mob n", i, " : " + j.map.mobs[i].name + "en position", j.map.mobs[i].pos.x,",",j.map.mobs[i].pos.y )
-            if j.map.mobs[i].pos.x == int(coord[0]) and j.map.mobs[i].pos.y == int(coord[1]):
-                mob = j.map.mobs[i]
-        f = Fight(j, mob)
-        res = f.fight()
-        v.isAgro = False
-        if res == 1 :
-            v.displayJoueur(j)
-            v.displayMap(j)
-            v.displayInfoCell(j, msg)
-            print(mob.name, " disparait...")
-            input()
-            j.map.setCell(mob.pos.x, mob.pos.y, '.')
-            mob.setPos(Point(-1,-1))
-            mob.isdead = True
-            v.displayJoueur(j)
-            v.displayMap(j)
-            v.displayInfoCell(j, msg)
-        if res == 2 :
-            print("Joueur dead")
-            input()
-        if res == 3:
-            print("Both KO")
-            input()
-        # TODO Delete mob
+        if instruct == 'r':
+            input("You try to run away")
+            run = random.randint(0,100)
+            if run > 80:
+                print("You manage tu run")
+                input()
+                v.setIsAgro(False)
+                instruct = v.getInstruct()
+                res,msg,upmsg = j.act(instruct)
+
+                pass
+            else:
+                print("You are not fast enought")
+                input()
+                instruct = 'f'
+        if instruct == 'f':
+            coord = v.event.split(',')
+            v.event = ""
+            mob = None
+            for i in range(len(j.map.mobs)):
+                #print( "Mob n", i, " : " + j.map.mobs[i].name + "en position", j.map.mobs[i].pos.x,",",j.map.mobs[i].pos.y )
+                if j.map.mobs[i].pos.x == int(coord[0]) and j.map.mobs[i].pos.y == int(coord[1]):
+                    mob = j.map.mobs[i]
+            f = Fight(j, mob)
+            res = f.fight()
+            v.isAgro = False
+            if res == 1 :
+                v.displayJoueur(j)
+                v.displayMap(j)
+                v.displayInfoCell(j, msg)
+                print(mob.name, " disparait...")
+                input()
+                j.map.setCell(mob.pos.x, mob.pos.y, '.')
+                mob.setPos(Point(-1,-1))
+                mob.isdead = True
+                v.displayJoueur(j)
+                v.displayMap(j)
+                v.displayInfoCell(j, msg)
+            if res == 2 :
+                print("Joueur dead")
+                input()
+            if res == 3:
+                print("Both KO")
+                input()
+
 
 
     """

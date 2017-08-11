@@ -25,23 +25,27 @@ class View:
 
 
     def menu(self):
-        clear()
-        print ("Que voulez vous faire ?")
-        print (" 1. Nouvelle Partie")
-        print (" 2. Quitter")
-
-        return input("")
+        res = ['1', '2']
+        while 1:
+            clear()
+            print ("Que voulez vous faire ?")
+            print (" 1. Nouvelle Partie")
+            print (" 2. Quitter")
+            r = input("")
+            if r in res:
+                break
+        return r
 
     def createJoueur(self):
         clear()
         nom = input("Quel est le nom de votre joueur ? ")
-
+        res = ['1', '2', '3']
         while True :
             diff = input("Quel niveau de difficulte (Entre 1 et 3) ? ")
-            diff = int(diff)
-            if diff >=0 and diff <=3:
-                break
-        return (nom, diff)
+            if diff in res:
+                diff = int(diff)
+                return nom,diff
+
 
     def displayJoueur(self, j):
         clear()
@@ -160,16 +164,27 @@ class View:
         print("    + d : Down")
         print("    + t : Take")
         print("    + h : Help")
+        print("    + u : use")
+        print("    + f : fight")
+        print("    + r : run")
         print("Map : ")
         print("    + . : Nothing")
         print("    + o : Hole")
         print("    + # : Object")
         print("    + @ : Ennemy")
         print("Objects : ")
-        print("    + Torch  : +1 Light")
-        print("    + Sword  : +10 attack")
-        print("    + Rock   : +5 attack")
-        print("    + Armor  : +10 hp")
+        print("    + Torche        : la salle s'eclaire (LIGT +1)")
+        print("    + Fireball      : Une explosion de lumiere ! (LIGT +3)")
+        print("    + Epe en bois   : Petite epe en bois, plus efficace sur scene qu'en combat (ATK +5)")
+        print("    + Epe en fer    : Une epe digne des plus grands forgerons (ATK +15)")
+        print("    + Epe du demon  : La legende dit qu'elle est faite depuis la queue du demon... (ATK +50)")
+        print("    + Anneau        : Un etrange anneau (???)")
+        print("    + Amulette      : Une etrange amulette (???)")
+        print("    + Petite Armure : Une legere armure en cuire, elle vous sauvera des plus petits ennemis (HP +10)")
+        print("    + Grosse Armure : Une belle armure de chevalier (HP +25)")
+        print("    + Bouclier      : Un authentique ecusson de chevalier (HP +20)")
+        print("    + Masque        : Vous faites peur aux ennemis, ils vous attaquent de plus loin (AGRO +1)")
+
 
     def win(self):
         clear()
