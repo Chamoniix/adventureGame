@@ -52,10 +52,11 @@ class View:
         print ("################# ", j.name, " #################")
         print ("  + HP         : ", j.hp, "/", j.hpMax)
         print ("  + Attack     : ", j.attack)
+        print ("  + precision : ", j.precision)
         print ("  + Niveau     : ", j.niveau)
         print ("  + Experience : ", j.experience, "/", j.xpNeed)
         print ("  + Equipement : ", j.objs)
-
+    
     def displayMap(self, j):
         for i in range (0,j.map.size.y):
             l = "|"

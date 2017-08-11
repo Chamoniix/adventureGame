@@ -24,15 +24,20 @@ class ViewFight:
         print("#                                                                 #")
         print("###################################################################")
 
-        stri = "  + HP   : " + str(j.hp) + "/" + str(j.hpMax)
+        stri = "  + HP         : " + str(j.hp) + "/" + str(j.hpMax)
         while not len(stri) == 33:
             stri += " "
-        stri += "|  + HP  :" + str(mob.hp) + "/" + str(mob.hpMax)
+        stri += "|  + HP         :" + str(mob.hp) + "/" + str(mob.hpMax)
         print(stri)
-        stri = "  + Attack   : " + str(j.attack)
+        stri = "  + Attack     : " + str(j.attack)
         while not len(stri) == 33:
             stri += " "
-        stri += "|  + Attack   : " + str(mob.attack)
+        stri += "|  + Attack     : " + str(mob.attack)
+        print(stri)
+        stri = "  + Precision  : " + str(j.precision)
+        while not len(stri) == 33:
+            stri += " "
+        stri += "|  + Precision  :" + str(mob.precision)
         print(stri)
         print ("Usable    : ", j.usables)
         print ("XP reward : ", mob.experienceReward)
@@ -53,5 +58,11 @@ class ViewFight:
         return act
 
     def displayHit(self, dmgJ, dmgM, jname, mname):
-        self.attackStr1 = " > " + jname +   " inflige " + str(dmgJ) + " points de degats a " + mname + " !"
-        self.attackStr2 = " > " + mname + " attaque, vous perdez " + str(dmgM) + " points de vie!"
+        if dmgJ == 0 :
+            self.attackStr1 = " > " + jname + " rate son attaque..."
+        else:
+            self.attackStr1 = " > " + jname +   " inflige " + str(dmgJ) + " points de degats a " + mname + " !"
+        if dmgM == 0:
+            self.attackStr2 = " > " + mname + " rate son attaque..."
+        else:
+            self.attackStr2 = " > " + mname + " attaque, vous perdez " + str(dmgM) + " points de vie!"

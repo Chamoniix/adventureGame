@@ -22,18 +22,24 @@ class Map :
 
         if l == 0 :
             pass
-        elif -l > 0 and -l < 3 :
-            self.addMob(1)
-        elif  -l < 5 :
+        elif l == -1:
             self.addMob(2)
-        elif -l < 7:
-            self.addMob(3)
-        elif -l <  8:
+        elif l == -2:
             self.addMob(4)
-        elif -l < 9:
+        elif l == -3:
+            self.addMob(5)
+        elif l == -4:
             self.addMob(6)
-        elif -l == 9:
-            self.addMob(10)
+        elif l == -5:
+            self.addMob(7)
+        elif l == -6:
+            self.addMob(8)
+        elif l == -7:
+            self.addMob(8)
+        elif l == -8:
+            self.addMob(9)
+        elif l == -9:
+            self.addMob(13)
         elif -l == 10:
             print("boss")
 
@@ -41,7 +47,7 @@ class Map :
 
     def addMob(self, nb):
         for i in range(0,nb):
-            mob = Mob(self.map)
+            mob = Mob(self.map, self.lvl)
             self.setCell(mob.pos.x, mob.pos.y, '@')
             self.mobs.append(mob)
 

@@ -9,7 +9,8 @@ class Fight:
         self.j = j
         self.mob = mob
         self.v = ViewFight()
-
+        if mob.name == "Spectre":
+            j.precision = 20
     ''' returns :
         + 1 : Mob died
         + 2 : Joueur died

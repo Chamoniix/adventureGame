@@ -6,7 +6,7 @@ import math
 class Joueur:
     def __init__(self, nom, diff):
         self.name = nom
-        self.hpMax = 20000
+        self.hpMax = 200
         self.hp = 200
         self.attack = 10
         self.precision = 80
@@ -172,7 +172,7 @@ class Joueur:
     def testExp(self):
         if self.experience > self.xpNeed :
             self.niveau += 1
-            hp = random.randint(2,8)
+            hp = random.randint(2 + self.niveau*5, 8 + self.niveau*5)
             self.hp += hp
             self.hpMax += hp
             atk = random.randint(2,8)
