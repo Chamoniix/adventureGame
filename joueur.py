@@ -30,7 +30,7 @@ class Joueur:
         self.map = Map(self.mapSize, self.mapSize)
         self.map.setCell(self.x, self.y,'x')
         self.objs = []
-        self.usables = ["Potion", "Steak"]
+        self.usables = ["Potion", "Steak", "pistahce", "carotte", "chocolat"]
 
     def act(self, instruct):
         msg = ""
@@ -129,6 +129,13 @@ class Joueur:
             self.experience += 10
             nom = "OBJ" + nom
             return 1,nom
+
+    def use(self, i):
+        if self.usables[int(i)-1]=="Potion" and self.hp < self.hpMax:
+            self.hp+=100
+            if self.hp > self.hpMax:
+                self.hp = self.hpMax
+            self.usables.remove("Potion")
 
     def moveMobs(self):
         for i in range(0,len(self.map.mobs)):

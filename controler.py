@@ -54,7 +54,11 @@ while (quit == False):
         + 3 : Mob aggro
     """
     if not v.isAgro:
-        res,msg,upmsg = j.act(instruct)
+        if instruct == 'u':
+            res = v.quelObjet(j.usables)
+            j.use(res)
+        else:
+            res,msg,upmsg = j.act(instruct)
         if j.map.lvl == 10:
             break
     else :

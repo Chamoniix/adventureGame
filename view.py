@@ -10,7 +10,7 @@ class View:
         self.isAgro = False
         self.event = ""
         self.upMsg = ""
-        self.cmd = ['n', 's', 'e', 'w', 'd', 'i', 't', 'h']
+        self.cmd = ['n', 's', 'e', 'w', 'd', 'i', 't', 'h', 'u']
         self.objDef = objects = {"Torche" : "la salle s'eclaire (LIGT +1)",
         "Fireball" : "Une explosion de lumiere ! (LIGT +3)",
         "Epe en bois" : "Petite epe en bois, plus efficace sur scene qu'en combat (ATK +5)",
@@ -56,7 +56,7 @@ class View:
         print ("  + Niveau     : ", j.niveau)
         print ("  + Experience : ", j.experience, "/", j.xpNeed)
         print ("  + Equipement : ", j.objs)
-    
+
     def displayMap(self, j):
         for i in range (0,j.map.size.y):
             l = "|"
@@ -100,6 +100,34 @@ class View:
         print("#      Un monstre vous agresse !           #")
         print("#                                          #")
         print("############################################")
+
+    def quelObjet(self, objs):
+        clear()
+        print("############################################")
+        print("#                                          #")
+        print("#                INVENTAIRE                #")
+        print("#                                          #")
+        print("############################################")
+        print("       ________     ________   ")
+        print("       |      |     |      |   ")
+        print("   /'''''''''''''''''''''''''\ ")
+        print("  /                           \ ")
+        print("  |                            |")
+        print("  (     | |          | |       )")
+        print("  |     |'|          |'|       |")
+        print("  (                            )")
+        print("  |    ###                     |")
+        print("  |    ###   ###      Addidas  |")
+        print("  |    ###   ###   ###         |")
+        print("  \    ###   ###   ###        / ")
+        print("   \_________________________/")
+        print()
+        print()
+        print("You have : ")
+        for i in range(0,len(objs)-1):
+            print("    ", i+1, ". ", objs[i])
+        print()
+        return input("Que voulez vous utiliser ?")
 
     def getInstruct(self):
         print("")
