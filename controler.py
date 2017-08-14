@@ -49,18 +49,25 @@ while (quit == False):
         - 1 : Impossible direction
         - 2 : Not on the exit, can't use down
         - 3 : Not on an object, can't use take
+        - 4 : Empty inventory
+        - 5 : Full HP can't use
         + 1 : Found an object, display efects
         + 2 : New floor
         + 3 : Mob aggro
+        + 4 : Found an usable, display name
+        + 5 : Object used, display effect
     """
     if not v.isAgro:
         if instruct == 'u':
-            res = v.quelObjet(j.usables)
-            j.use(res)
+            if (len(j.usables) == 0):
+                res = -4
+                msg = "Empty inventory"
+            else:
+                res = v.quelObjet(j.usables)
+                if not res == -1:
+                    res, msg = j.use(res)
         else:
             res,msg,upmsg = j.act(instruct)
-        if j.map.lvl == 10:
-            break
     else :
         if instruct == 'r':
             input("You try to run away")

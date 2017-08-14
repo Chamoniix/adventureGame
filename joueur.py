@@ -30,7 +30,7 @@ class Joueur:
         self.map = Map(self.mapSize, self.mapSize)
         self.map.setCell(self.x, self.y,'x')
         self.objs = []
-        self.usables = ["Potion", "Steak", "pistahce", "carotte", "chocolat"]
+        self.usables = []
 
     def act(self, instruct):
         msg = ""
@@ -68,6 +68,8 @@ class Joueur:
             self.map.setCell(self.x,self.y,'o')
         elif (self.isOnObj() == 0):
             self.map.setCell(self.x,self.y,'#')
+        elif (self.isOnUsable() == 0):
+            self.map.setCell(self.x,self.y,'~')
         else:
             self.map.setCell(self.x,self.y,'.')
         inix = self.x
@@ -94,48 +96,89 @@ class Joueur:
     ''' returns :
         -3 : Not on an Object
         +1 : Took one object, msg = "OBJobjectname"
+        +4 : Took one usable, msg = "USBLobjectname"
     '''
     def take(self):
-        if self.isOnObj():
+        if self.isOnObj() and self.isOnUsable():
             return -3, ""
         else:
-            self.map.obj.x = -1
-            self.map.obj.y = -1
-            nom = self.map.obj.nom
-            self.objs.append(nom)
+            if not self.isOnObj():
+                self.map.obj.x = -1
+                self.map.obj.y = -1
+                nom = self.map.obj.nom
+                self.objs.append(nom)
 
-            if nom == "Torche":
-                self.light +=1
-            if nom == "Fireball":
-                self.light +=3
-            if nom == "Epe en bois":
-                self.attack +=5
-            if nom == "Epe en fer":
-                self.attack +=15
-            if nom == "Epe du demon":
-                self.attack +=50
-            if nom == "Petite Armure":
-                self.hp +=10
-                self.hpMax += 10
-            if nom == "Grosse Armure":
-                self.hp +=25
-                self.hpMax += 25
-            if nom == "Bouclier":
-                self.hp +=20
-                self.hpMax += 20
-            if nom == "Masque":
-                self.agroDist +=1
+                if nom == "Torche":
+                    self.light +=1
+                if nom == "Fireball":
+                    self.light +=3
+                if nom == "Epe en bois":
+                    self.attack +=5
+                if nom == "Epe en fer":
+                    self.attack +=15
+                if nom == "Epe du demon":
+                    self.attack +=50
+                if nom == "Petite Armure":
+                    self.hp +=10
+                    self.hpMax += 10
+                if nom == "Grosse Armure":
+                    self.hp +=25
+                    self.hpMax += 25
+                if nom == "Bouclier":
+                    self.hp +=20
+                    self.hpMax += 20
+                if nom == "Masque":
+                    self.agroDist +=1
 
-            self.experience += 10
-            nom = "OBJ" + nom
-            return 1,nom
+                self.experience += 10
+                nom = "OBJ" + nom
+                return 1,nom
+            elif not self.isOnUsable():
+                self.map.usbl.pos.delete()
 
+                nom = self.map.usbl.name
+                self.usables.append(nom)
+
+                self.experience += 5
+                nom = "USBL" + nom
+                return 4,nom
+
+    '''
+    returns :
+        -1 : Full HP can't use Potion
+        '''
     def use(self, i):
-        if self.usables[int(i)-1]=="Potion" and self.hp < self.hpMax:
-            self.hp+=100
-            if self.hp > self.hpMax:
+        name = self.usables[int(i)-1]
+        if self.usables[int(i)-1]=="Small Potion":
+            if  self.hp < self.hpMax:
+                self.hp+=10
+                if self.hp > self.hpMax:
+                    self.hp = self.hpMax
+                self.usables.remove("Small Potion")
+            else:
+                return -5, "full hp"
+        elif self.usables[int(i)-1]=="Potion":
+            if  self.hp < self.hpMax:
+                self.hp+=100
+                if self.hp > self.hpMax:
+                    self.hp = self.hpMax
+                self.usables.remove("Potion")
+            else:
+                return -5, "full hp"
+        elif self.usables[int(i)-1]=="Big Potion":
+            if  self.hp < self.hpMax:
                 self.hp = self.hpMax
-            self.usables.remove("Potion")
+                self.usables.remove("Big Potion")
+            else :
+                return -5, "full hp"
+        elif self.usables[int(i)-1]=="HP+":
+            self.hpMax += 20
+            self.hp += 20
+            self.usables.remove("HP+")
+        elif self.usables[int(i)-1]=="ATK+":
+            self.attack += 20
+            self.usables.remove("ATK+")
+        return 5, name
 
     def moveMobs(self):
         for i in range(0,len(self.map.mobs)):
@@ -203,6 +246,11 @@ class Joueur:
 
     def isOnObj(self):
         if self.x == self.map.obj.x and self.y == self.map.obj.y:
+            return 0
+        else:
+            return -1
+    def isOnUsable(self):
+        if self.x == self.map.usbl.pos.x and self.y == self.map.usbl.pos.y:
             return 0
         else:
             return -1

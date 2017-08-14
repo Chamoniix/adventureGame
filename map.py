@@ -2,6 +2,7 @@
 
 from object import *
 from mob import *
+from usable import *
 
 class Map :
     """Class Map defined by :
@@ -16,9 +17,11 @@ class Map :
         for i in range(self.size.y):
             self.map.append(['.'] * self.size.x)
         self.obj = Object(self.map)
+        self.usbl = Usable(self.map)
         self.mobs = []
         self.setCell(self.out.x, self.out.y, 'o')
         self.setCell(self.obj.x, self.obj.y, '#')
+        self.setCell(self.usbl.pos.x, self.usbl.pos.y, '~')
 
         if l == 0 :
             pass

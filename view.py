@@ -11,7 +11,7 @@ class View:
         self.event = ""
         self.upMsg = ""
         self.cmd = ['n', 's', 'e', 'w', 'd', 'i', 't', 'h', 'u']
-        self.objDef = objects = {"Torche" : "la salle s'eclaire (LIGT +1)",
+        self.objDef = {"Torche" : "la salle s'eclaire (LIGT +1)",
         "Fireball" : "Une explosion de lumiere ! (LIGT +3)",
         "Epe en bois" : "Petite epe en bois, plus efficace sur scene qu'en combat (ATK +5)",
         "Epe en fer" : "Une epe digne des plus grands forgerons (ATK +15)",
@@ -22,7 +22,11 @@ class View:
         "Grosse Armure" : "Une belle armure de chevalier (HP +25)",
         "Bouclier" : "Un authentique ecusson de chevalier (HP +20)",
         "Masque" : "Vous faites peur aux ennemis, ils vous attaquent de plus loin (AGRO +1)"}
-
+        self.usblDef = {'Small Potion' : "HP +10",
+        'Potion' : "HP + 100",
+        'Big Potion': "HP max !",
+        'HP+' : "HP+20",
+        'ATK+': "ATK+20"}
 
     def menu(self):
         res = ['1', '2']
@@ -83,6 +87,8 @@ class View:
             print ("+ Il y a un trou !")
         elif (j.isOnObj() == 0):
             print ("+ Il y a un Objet !")
+        elif (j.isOnUsable() == 0):
+            print ("+ Il y a quelque chose sur le sol...")
         elif (j.map.map[j.x][j.y] == '.'):
             print ("+ il n'y a rien sur cette case")
 
@@ -124,10 +130,23 @@ class View:
         print()
         print()
         print("You have : ")
-        for i in range(0,len(objs)-1):
+        results = []
+        for i in range(0,len(objs)):
             print("    ", i+1, ". ", objs[i])
+        print("    ", "c", ". Press c to cancel")
+        results.append(str(i+1))
         print()
-        return input("Que voulez vous utiliser ?")
+        while 1 :
+            res = input("Que voulez vous utiliser ?")
+            if res == 'c':
+                return -1
+            elif res in results :
+                break
+            else :
+                print("Entrez le numero correspondant a l'objet que vous voulez utiliser")
+        return res
+
+
 
     def getInstruct(self):
         print("")
@@ -163,6 +182,10 @@ class View:
             self.err = "YOU CAN'T GO DOWN"
         elif error == -3:
             self.err = "THERE IS NOTHING TO TAKE"
+        elif error == -4:
+            self.err = "THERE IS NOTHING IN YOUR INVENTORY"
+        elif error == -5:
+            self.err = "FULL HP, YOU CAN'T USE THIS"
         elif error == 0:
             self.err = ""
 
@@ -171,6 +194,10 @@ class View:
             self.event =  "Vous avez recupere " + msg[3:len(msg)] + "\n>>> " + self.objDef[msg[3:len(msg)]]
         elif event == 2:
             self.event = "Vous tombez dans une nouvelle piece"
+        if event == 4 and msg[0:4] == "USBL":
+            self.event =  "Vous avez trouve un objet utilisable : " + msg[4:len(msg)] + " !\n>>> Utilisez 'u' pour ouvrir l'inventaire"
+        if event == 5:
+            self.event =  "Vous avez utilise " + msg + ".\n>>> " + self.usblDef[msg]
         elif event == 0:
             self.event = ""
 
