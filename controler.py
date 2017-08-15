@@ -108,6 +108,7 @@ while (quit == False):
                 print(mob.name, " disparait...")
                 input()
                 j.map.setCell(mob.pos.x, mob.pos.y, '.')
+                j.experience += mob.experienceReward
                 mob.setPos(Point(-1,-1))
                 mob.isdead = True
                 v.displayJoueur(j)

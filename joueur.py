@@ -135,7 +135,7 @@ class Joueur:
                 if nom == "Shoes":
                     self.canRun = True
 
-                self.experience += 10
+                self.experience += (-self.map.lvl*5)
                 nom = "OBJ" + nom
                 return 1,nom
             elif not self.isOnUsable():
