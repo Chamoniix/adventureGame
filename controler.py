@@ -51,6 +51,7 @@ while (quit == False):
         - 3 : Not on an object, can't use take
         - 4 : Empty inventory
         - 5 : Full HP can't use
+        - 6 : No Shoes, can't run
         + 1 : Found an object, display efects
         + 2 : New floor
         + 3 : Mob aggro
@@ -70,20 +71,24 @@ while (quit == False):
             res,msg,upmsg = j.act(instruct)
     else :
         if instruct == 'r':
-            input("You try to run away")
-            run = random.randint(0,100)
-            if run > 80:
-                print("You manage tu run")
-                input()
-                v.setIsAgro(False)
-                instruct = v.getInstruct()
-                res,msg,upmsg = j.act(instruct)
+            if j.canRun :
+                input("You try to run away")
+                run = random.randint(0,100)
+                if run > 80:
+                    print("You manage tu run")
+                    input()
+                    v.setIsAgro(False)
+                    instruct = v.getInstruct()
+                    res,msg,upmsg = j.act(instruct)
 
-                pass
-            else:
-                print("You are not fast enought")
-                input()
-                instruct = 'f'
+                    pass
+                else:
+                    print("You are not fast enought")
+                    input()
+                    instruct = 'f'
+            else :
+                msg = "No shoes"
+                res = -6
         if instruct == 'f':
             coord = v.event.split(',')
             v.event = ""
@@ -94,6 +99,7 @@ while (quit == False):
                     mob = j.map.mobs[i]
             f = Fight(j, mob)
             res = f.fight()
+            v.setErr(0,"")
             v.isAgro = False
             if res == 1 :
                 v.displayJoueur(j)
@@ -108,8 +114,7 @@ while (quit == False):
                 v.displayMap(j)
                 v.displayInfoCell(j, msg)
             if res == 2 :
-                print("Joueur dead")
-                input()
+                break
             if res == 3:
                 print("Both KO")
                 input()
@@ -135,7 +140,8 @@ while (quit == False):
     if res == 3 :
         v.setIsAgro(True, msg)
     else:
-        v.setIsAgro(False)
+        if not instruct == 'r':
+            v.setIsAgro(False)
 
 v.win()
 

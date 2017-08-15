@@ -8,7 +8,7 @@ class Object:
     def __init__(self, map):
         objects = ["Torche", "Fireball",                        # LIGHT
                 "Epe en bois", "Epe en fer", "Epe du demon",    # ATTACK
-                "Anneau", "Amulette",                           # ??? Spetials
+                "Anneau", "Amulette", "Shoes"                           # ??? Spetials
                  "Petite Armure", "Grosse Armure", "Bouclier",  # HP
                  "Masque"]                                      # BAD
         sX = len(map[:][1])
