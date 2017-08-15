@@ -17,7 +17,7 @@ class Map :
         for i in range(self.size.y):
             self.map.append(['.'] * self.size.x)
         self.obj = Object(self.map)
-        self.usbl = Usable(self.map)
+        self.usbl = Usable(self.map, self.lvl)
         self.mobs = []
         self.setCell(self.out.x, self.out.y, 'o')
         self.setCell(self.obj.x, self.obj.y, '#')

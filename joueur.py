@@ -181,8 +181,11 @@ class Joueur:
             self.hp += 20
             self.usables.remove("HP+")
         elif self.usables[int(i)-1]=="ATK+":
-            self.attack += 20
+            self.attack += 10
             self.usables.remove("ATK+")
+        elif self.usables[int(i)-1]=="PREC+":
+            self.precision += 5
+            self.usables.remove("PREC+")
         return 5, name
 
     def moveMobs(self):

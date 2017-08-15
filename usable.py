@@ -3,8 +3,10 @@ import random
 from point import *
 
 class Usable:
-    def __init__(self, map):
-        usables = ['Small Potion', 'Potion', 'Big Potion', 'HP+', 'ATK+']
+    def __init__(self, map, lvl):
+        usables = ['Potion', 'Big Potion','PREC+', 'HP+', 'ATK+']
+        if -lvl < 5 :
+            usables.append('Small Potion')
         self.name = usables[random.randint(0,len(usables)-1)]
 
         sX = len(map[:][1])
