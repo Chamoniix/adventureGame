@@ -27,7 +27,8 @@ class View:
         'Potion' : "HP + 100",
         'Big Potion': "HP max !",
         'HP+' : "HP+20",
-        'ATK+': "ATK+20"}
+        'ATK+': "ATK+10",
+        'PREC+': "PREC+5"}
 
     def menu(self):
         res = ['1', '2']
@@ -53,13 +54,20 @@ class View:
 
 
     def displayJoueur(self, j):
+        exp = math.floor(15 * j.experience / j.xpNeed)
+        strExp = '|'
+        for i in range(0,exp):
+            strExp += '#'
+        while len(strExp) < 16:
+            strExp += ' '
+        strExp += '|'
         clear()
         print ("################# ", j.name, " #################")
         print ("  + HP         : ", j.hp, "/", j.hpMax)
         print ("  + Attack     : ", j.attack)
         print ("  + precision : ", j.precision)
         print ("  + Niveau     : ", j.niveau)
-        print ("  + Experience : ", j.experience, "/", j.xpNeed)
+        print ("  + Experience : ", strExp)
         print ("  + Equipement : ", j.objs)
 
     def displayMap(self, j):
@@ -253,7 +261,16 @@ class View:
 
 # tests
 if __name__ == "__main__":
+    from joueur import *
     v = View()
-    while 1 :
-        print( "Choix : ", v.quelObjet(["Test 1","Test 2","Test 3","Test 4","Test 5"]))
+    j = Joueur("TestBot", 1)
+    # Quel Object test :
+    print( "Choix : ", v.quelObjet(["Test 1","Test 2","Test 3","Test 4","Test 5"]))
+    input()
+    # Experience display :
+    for i in range(0,11):
+        j.experience = i
+
+        v.displayJoueur(j)
+        print(i)
         input()
