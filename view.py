@@ -21,7 +21,8 @@ class View:
         "Petite Armure" : "Une legere armure en cuire, elle vous sauvera des plus petits ennemis (HP +10)",
         "Grosse Armure" : "Une belle armure de chevalier (HP +25)",
         "Bouclier" : "Un authentique ecusson de chevalier (HP +20)",
-        "Masque" : "Vous faites peur aux ennemis, ils vous attaquent de plus loin (AGRO +1)"}
+        "Masque" : "Vous faites peur aux ennemis, ils vous attaquent de plus loin (AGRO +1)",
+        "Shoes": "Vous pouvez maintenant essayer de vous enfuire lorsqu'un monstre vous attaque !"}
         self.usblDef = {'Small Potion' : "HP +10",
         'Potion' : "HP + 100",
         'Big Potion': "HP max !",
@@ -100,7 +101,7 @@ class View:
             print ("> ", self.upMsg)
 
     def displayAgro(self):
-        print()
+        print(self.err)
         print("############################################")
         print("#                                          #")
         print("#      Un monstre vous agresse !           #")
@@ -133,8 +134,9 @@ class View:
         results = []
         for i in range(0,len(objs)):
             print("    ", i+1, ". ", objs[i])
+            results.append(str(i+1))
         print("    ", "c", ". Press c to cancel")
-        results.append(str(i+1))
+
         print()
         while 1 :
             res = input("Que voulez vous utiliser ?")
@@ -186,6 +188,8 @@ class View:
             self.err = "THERE IS NOTHING IN YOUR INVENTORY"
         elif error == -5:
             self.err = "FULL HP, YOU CAN'T USE THIS"
+        elif error == -6:
+            self.err = "YOU HAVE NO SHOES, YOU CAN'T RUN"
         elif error == 0:
             self.err = ""
 
@@ -245,3 +249,11 @@ class View:
     def win(self):
         clear()
         print("gg")
+        input()
+
+# tests
+if __name__ == "__main__":
+    v = View()
+    while 1 :
+        print( "Choix : ", v.quelObjet(["Test 1","Test 2","Test 3","Test 4","Test 5"]))
+        input()

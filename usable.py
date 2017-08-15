@@ -4,7 +4,7 @@ from point import *
 
 class Usable:
     def __init__(self, map):
-        usables = ['Small potion', 'Potion', 'Big Potion', 'HP+', 'ATK+']
+        usables = ['Small Potion', 'Potion', 'Big Potion', 'HP+', 'ATK+']
         self.name = usables[random.randint(0,len(usables)-1)]
 
         sX = len(map[:][1])
