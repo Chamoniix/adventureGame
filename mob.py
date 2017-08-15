@@ -12,22 +12,22 @@ class Mob:
         mobs = []
 
 
-        if -lvl < 4:
+        if -lvl < 3:
             mobs.append(MobDescriptor("rat", 10, 10, 10, 70))
-        if -lvl < 5 and -lvl > 1:
-            mobs.append(MobDescriptor("Gobelin", 20, 10, 20, 80))
-        if -lvl < 8 and -lvl > 2 :
-            mobs.append(MobDescriptor("Sorcier", 30, 35, 50, 80))
-        if -lvl < 8 and -lvl > 3 :
-            mobs.append(MobDescriptor("Gargouille", 60, 20, 70, 70))
+        if -lvl < 4 and -lvl > 1:
+            mobs.append(MobDescriptor("Gobelin", 30, 15, 20, 80))
+        if -lvl < 7 and -lvl > 2 :
+            mobs.append(MobDescriptor("Sorcier", 50, 20, 50, 80))
+        if -lvl < 7 and -lvl > 3 :
+            mobs.append(MobDescriptor("Gargouille", 100, 10, 70, 70))
         if -lvl > 4 :
             mobs.append(MobDescriptor("Spectre", 15, 15, 200, 70))
         if -lvl > 5:
-            mobs.append(MobDescriptor("Troll", 100, 40, 100, 50))
+            mobs.append(MobDescriptor("Troll", 200, 25, 100, 50))
         if -lvl > 6:
             mobs.append(MobDescriptor("Sorcier Demoniaque", 70, 70, 200, 100))
         if -lvl > 7:
-            mobs.append(MobDescriptor("Faucheur", 110, 50, 300, 90))
+            mobs.append(MobDescriptor("Faucheur", 150, 50, 300, 90))
         if -lvl > 8:
             mobs.append(MobDescriptor("Garde des tenebres", 300, 50, 1000, 80))
 

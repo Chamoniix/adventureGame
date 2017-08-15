@@ -5,6 +5,7 @@ import math
 
 class Joueur:
     def __init__(self, nom, diff):
+        self.canRun = False
         self.name = nom
         self.hpMax = 200
         self.hp = 200
@@ -46,6 +47,8 @@ class Joueur:
     def down(self):
         if self.isOut() == 0:
             lvl = self.map.lvl
+            if lvl == -5:
+                self.agroDist +=1
             self.experience += (-lvl+1) * 4
             del self.map
             self.map = Map(self.mapSize - lvl + 1 , self.mapSize - lvl + 1 , lvl-1)
@@ -129,6 +132,8 @@ class Joueur:
                     self.hpMax += 20
                 if nom == "Masque":
                     self.agroDist +=1
+                if nom == "Shoes":
+                    self.canRun = True
 
                 self.experience += 10
                 nom = "OBJ" + nom

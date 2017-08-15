@@ -10,7 +10,8 @@ class Fight:
         self.mob = mob
         self.v = ViewFight()
         if mob.name == "Spectre":
-            j.precision = 20
+            self.savedPrec = j.precision
+            j.precision = 15
     ''' returns :
         + 1 : Mob died
         + 2 : Joueur died
@@ -36,6 +37,8 @@ class Fight:
                     elif res == 3:
                         print (self.mob.name, " and ", self.j.name, " are dead.")
                     input()
+                    if self.mob.name == "Spectre":
+                        self.j.precision = self.savedPrec
                     return res
                 self.v.displayHit(dmgJ, dmgM, self.j.name, self.mob.name)
 
@@ -47,8 +50,8 @@ class Fight:
 
 
     def attack(self):
-        dmgJ = self.j.attack + random.randint(-math.floor(self.j.attack/10),math.floor(self.j.attack/10))
-        dmgM = self.mob.attack + random.randint(-math.floor(self.mob.attack/10),math.floor(self.mob.attack/10))
+        dmgJ = math.floor((self.j.attack - random.randint(0,math.floor(self.j.attack/2)))/2)
+        dmgM = math.floor((self.mob.attack - random.randint(0,math.floor(self.mob.attack/2)))/2)
 
         touche = random.randint(0,100)
         if touche > self.j.precision:
