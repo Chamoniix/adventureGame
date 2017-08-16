@@ -134,6 +134,8 @@ class Joueur:
                     self.agroDist +=1
                 if nom == "Shoes":
                     self.canRun = True
+                if nom == "Amulette":
+                    self.map.shadow = False
 
                 self.experience += (-self.map.lvl*5)
                 nom = "OBJ" + nom
@@ -186,7 +188,10 @@ class Joueur:
         elif self.usables[int(i)-1]=="PREC+":
             self.precision += 5
             self.usables.remove("PREC+")
+        elif self.usables[int(i)-1]=="Un oeuf":
+            return 6, "Oeuf"
         return 5, name
+
 
     def moveMobs(self):
         for i in range(0,len(self.map.mobs)):
@@ -238,8 +243,9 @@ class Joueur:
             if self.niveau == 5 :
                 self.light += 1
                 self.upMsg += ", LIGHT +1"
-            self.xpNeed = 2 * math.pow(2, self.niveau-1) * 10
-            self.upMsg = "LEVEL UP ! HP +" + str(hp) + ", ATK +" + str(self.upMsg)
+            self.experience -= self.xpNeed
+            self.xpNeed = 2 * self.xpNeed
+            self.upMsg = "LEVEL UP ! HP +" + str(hp) + ", ATK +" + str(atk) + str(self.upMsg)
             return 0
         else:
             self.upMsg= ""

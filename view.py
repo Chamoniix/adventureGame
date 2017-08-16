@@ -17,7 +17,7 @@ class View:
         "Epe en fer" : "Une epe digne des plus grands forgerons (ATK +15)",
         "Epe du demon" : "La legende dit qu'elle est faite depuis la queue du demon... (ATK +50)",
         "Anneau" : "Un etrange anneau (???)",
-        "Amulette" : "Une etrange amulette (???)",
+        "Amulette" : "L'amullette vous permet de voir les ombres dans l'obscurite...",
         "Petite Armure" : "Une legere armure en cuire, elle vous sauvera des plus petits ennemis (HP +10)",
         "Grosse Armure" : "Une belle armure de chevalier (HP +25)",
         "Bouclier" : "Un authentique ecusson de chevalier (HP +20)",
@@ -28,7 +28,8 @@ class View:
         'Big Potion': "HP max !",
         'HP+' : "HP+20",
         'ATK+': "ATK+10",
-        'PREC+': "PREC+5"}
+        'PREC+': "PREC+5",
+        'Un oeuf' : "Vous trouvez un oeuf etrange... vous le mettez au chaud dans votre sac"}
 
     def menu(self):
         res = ['1', '2']
@@ -54,11 +55,11 @@ class View:
 
 
     def displayJoueur(self, j):
-        exp = math.floor(15 * j.experience / j.xpNeed)
+        exp = math.floor(20 * j.experience / j.xpNeed)
         strExp = '|'
         for i in range(0,exp):
             strExp += '#'
-        while len(strExp) < 16:
+        while len(strExp) < 21:
             strExp += ' '
         strExp += '|'
         clear()
@@ -74,7 +75,7 @@ class View:
         for i in range (0,j.map.size.y):
             l = "|"
             for k in range(0,j.map.size.x):
-                if (abs(j.x - k) + abs((j.map.size.y-1 - j.y) - i)) < j.light:#  or 1 :
+                if (abs(j.x - k) + abs((j.map.size.y-1 - j.y) - i)) < j.light or j.map.shadow == False:
                     l=l+str(j.map.map[i][k])+" "
                 else:
                     l=l+"  "
@@ -254,9 +255,53 @@ class View:
         print("    + Masque        : Vous faites peur aux ennemis, ils vous attaquent de plus loin (AGRO +1)")
 
 
+
+
     def win(self):
+        import random
+        def buildLine(txt):
+            if len(txt) < 30:
+                chars = ['~','#','@']
+                line = ""
+                nbSpaces = math.floor((50 - len(txt))/2)
+                for i in range(0,20):
+                    line += chars[random.randint(0,len(chars)-1)]
+                for i in range(0, nbSpaces):
+                    line += ' '
+                line+= txt
+                while  len(line) < 70:
+                    line += ' '
+                for i in range(0,20):
+                    line += chars[random.randint(0,len(chars)-1)]
+                return line
+            else :
+                return "Trop long"
+
         clear()
-        print("gg")
+        line = ""
+        line += buildLine(" ") + '\n'
+        line += buildLine(" ") + '\n'
+        line += buildLine("Good Game") + '\n'
+        line += buildLine(" ") + '\n'
+        line += buildLine(" ") + '\n'
+        line += buildLine(" ") + '\n'
+        line += buildLine("Stats finales : ") + '\n'
+        line += buildLine("lvl 20") + '\n'
+        line += buildLine("Attaque 300") + '\n'
+        line += buildLine("HP 600") + '\n'
+        line += buildLine("Precision") + '\n'
+        line += buildLine(" ") + '\n'
+        line += buildLine(" ") + '\n'
+        line += buildLine(" ") + '\n'
+        line += buildLine("SCORE : 8973548") + '\n'
+        line += buildLine(" ") + '\n'
+        line += buildLine("Bravo.") + '\n'
+        print(line)
+        input()
+
+    def lose(self):
+        clear()
+        print("nul.")
         input()
 
 # tests
@@ -274,3 +319,5 @@ if __name__ == "__main__":
         v.displayJoueur(j)
         print(i)
         input()
+
+    v.win()

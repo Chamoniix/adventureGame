@@ -10,6 +10,7 @@ class Map :
 
     """
     def __init__(self, sX, sY, l=0):
+        self.shadow = True
         self.size = Point(sX, sY)
         self.out = Point(random.randint(0,sX-1), random.randint(0,sY-1))
         self.lvl = l
@@ -44,9 +45,13 @@ class Map :
         elif l == -9:
             self.addMob(13)
         elif -l == 10:
-            print("boss")
-
-
+            self.shadow = False
+            self.setCell(self.out.x, self.out.y, '.')
+            self.out.x = -1
+            self.out.y = -1
+            self.setCell(self.usbl.pos.x, self.usbl.pos.y, '.')
+            self.usbl = Usable(self.map,self.lvl, "Un oeuf")
+            self.setCell(self.usbl.pos.x, self.usbl.pos.y, '~')
 
     def addMob(self, nb):
         for i in range(0,nb):

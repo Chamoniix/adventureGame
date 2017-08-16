@@ -13,9 +13,12 @@ if res == "1":
     nom, diff = v.createJoueur()
     j = Joueur(nom, diff)
 
-quit = False
-
-while (quit == False):
+''' Quit :
+    + 1 : win
+    - 1 : lose
+    '''
+quit = 0
+while (quit == 0):
     msg = ""
     upmsg = ""
     """
@@ -57,6 +60,7 @@ while (quit == False):
         + 3 : Mob aggro
         + 4 : Found an usable, display name
         + 5 : Object used, display effect
+        + 6 : Use last object
     """
     if not v.isAgro:
         if instruct == 'u':
@@ -67,6 +71,8 @@ while (quit == False):
                 res = v.quelObjet(j.usables)
                 if not res == -1:
                     res, msg = j.use(res)
+                    if res == 6:
+                        quit = 1
         else:
             res,msg,upmsg = j.act(instruct)
     else :
@@ -74,7 +80,7 @@ while (quit == False):
             if j.canRun :
                 input("You try to run away")
                 run = random.randint(0,100)
-                if run > 80:
+                if run > 75:
                     print("You manage tu run")
                     input()
                     v.setIsAgro(False)
@@ -92,13 +98,16 @@ while (quit == False):
         if instruct == 'f':
             coord = v.event.split(',')
             v.event = ""
+
             mob = None
             for i in range(len(j.map.mobs)):
                 #print( "Mob n", i, " : " + j.map.mobs[i].name + "en position", j.map.mobs[i].pos.x,",",j.map.mobs[i].pos.y )
                 if j.map.mobs[i].pos.x == int(coord[0]) and j.map.mobs[i].pos.y == int(coord[1]):
                     mob = j.map.mobs[i]
+            hp = j.hp
             f = Fight(j, mob)
             res = f.fight()
+            hp = hp - j.hp
             v.setErr(0,"")
             v.isAgro = False
             if res == 1 :
@@ -106,6 +115,7 @@ while (quit == False):
                 v.displayMap(j)
                 v.displayInfoCell(j, msg)
                 print(mob.name, " disparait...")
+                print("Vous avez perdu ", hp, " points de vie.")
                 input()
                 j.map.setCell(mob.pos.x, mob.pos.y, '.')
                 j.experience += mob.experienceReward
@@ -115,11 +125,11 @@ while (quit == False):
                 v.displayMap(j)
                 v.displayInfoCell(j, msg)
             if res == 2 :
-                break
+                quit = -1
             if res == 3:
                 print("Both KO")
                 input()
-
+                quit = -1
 
 
     """
@@ -144,7 +154,10 @@ while (quit == False):
         if not instruct == 'r':
             v.setIsAgro(False)
 
-v.win()
+if quit == 1:
+    v.win()
+elif quit == -1:
+    c.lose()
 
 """
 while 1 :
