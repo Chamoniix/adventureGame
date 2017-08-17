@@ -155,9 +155,9 @@ while (quit == 0):
             v.setIsAgro(False)
 
 if quit == 1:
-    v.win()
+    v.win(j)
 elif quit == -1:
-    c.lose()
+    c.lose(j)
 
 """
 while 1 :

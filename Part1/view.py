@@ -257,8 +257,10 @@ class View:
 
 
 
-    def win(self):
+    def win(self, j):
         import random
+        import time
+        import webbrowser
         def buildLine(txt):
             if len(txt) < 30:
                 chars = ['~','#','@']
@@ -277,29 +279,41 @@ class View:
             else :
                 return "Trop long"
 
-        clear()
-        line = ""
-        line += buildLine(" ") + '\n'
-        line += buildLine(" ") + '\n'
-        line += buildLine("Good Game") + '\n'
-        line += buildLine(" ") + '\n'
-        line += buildLine(" ") + '\n'
-        line += buildLine(" ") + '\n'
-        line += buildLine("Stats finales : ") + '\n'
-        line += buildLine("lvl 20") + '\n'
-        line += buildLine("Attaque 300") + '\n'
-        line += buildLine("HP 600") + '\n'
-        line += buildLine("Precision") + '\n'
-        line += buildLine(" ") + '\n'
-        line += buildLine(" ") + '\n'
-        line += buildLine(" ") + '\n'
-        line += buildLine("SCORE : 8973548") + '\n'
-        line += buildLine(" ") + '\n'
-        line += buildLine("Bravo.") + '\n'
-        print(line)
-        input()
 
-    def lose(self):
+        line = []
+        line.append(buildLine(" "))
+        line.append(buildLine(" "))
+        line.append(buildLine("Good Game"))
+        line.append(buildLine(" "))
+        line.append(buildLine(" "))
+        line.append(buildLine(" "))
+        line.append(buildLine("Stats finales : "))
+        line.append(buildLine("lvl " + str(j.niveau)))
+        line.append(buildLine("Attaque " + str(j.attack)))
+        line.append(buildLine("HP " + str(j.hpMax)))
+        line.append(buildLine("Precision " + str(j.precision)))
+        line.append(buildLine(" "))
+        line.append(buildLine(" "))
+        line.append(buildLine(" "))
+        line.append(buildLine("SCORE : 8973548"))
+        line.append(buildLine(" "))
+        line.append(buildLine("Bravo."))
+        for i in range(0, len(line)):
+            clear()
+            for j in range(0, len(line)-1):
+                if j>=i:
+                    print(line[j])
+                else:
+                    print()
+            if i == 0:
+                input()
+            else:
+                time.sleep(0.2)
+
+        url = "..\Part2\index.htm"
+        webbrowser.open(url,new=2)
+
+    def lose(self, j):
         clear()
         print("nul.")
         input()
@@ -320,4 +334,4 @@ if __name__ == "__main__":
         print(i)
         input()
 
-    v.win()
+    v.win(j)
