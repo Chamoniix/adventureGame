@@ -22,6 +22,7 @@
     font-size: 100px;
     text-align: center;
     transition: 1s;
+    opacity:0;
   }
   </style>
 </head>
@@ -38,6 +39,10 @@ state = ""
 $(document).ready(function(){
     $("#page").click(function(){
       if (state == "") {
+        $('h1').css("opacity","1");
+        state = "first";
+      }
+      else if (state == "first") {
         $('h1').css("opacity","0");
         state = "sleep";
       }

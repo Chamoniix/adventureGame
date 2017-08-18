@@ -90,6 +90,7 @@ class Controler:
                         with open(strFile, "wb") as f:
                             pickle.dump(self, f, pickle.HIGHEST_PROTOCOL)
                         quit = 2
+                        break
                 else:
                     res,msg,upmsg = self.j.act(instruct)
             else :

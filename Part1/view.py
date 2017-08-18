@@ -263,6 +263,7 @@ class View:
         import time
         import webbrowser
         import inspect
+        import json
         def buildLine(txt):
             if len(txt) < 30:
                 chars = ['~','#','@']
@@ -302,9 +303,9 @@ class View:
         line.append(buildLine("Bravo."))
         for i in range(0, len(line)):
             clear()
-            for j in range(0, len(line)-1):
-                if j>=i:
-                    print(line[j])
+            for k in range(0, len(line)-1):
+                if k>=i:
+                    print(line[k])
                 else:
                     print()
             if i == 0:
@@ -312,12 +313,21 @@ class View:
             else:
                 time.sleep(0.2)
         clear()
-        for j in range(0, len(line)-1):
-            if j == 8:
-                print("               Un gaz bizarre s'echappe de l'oeuf          ")
+        sleep(1)
+        for k in range(0, len(line)-1):
+            if k == 8:
+                print("               Un gaz bizarre s'echappe de l'oeuf...          ")
             else:
                 print()
-        time.sleep(0.5)
+        playerStat = {'hpMax' : j.hpMax,
+        'hp' : j.hp,
+        'attack'  : j.attack,
+        'precesion' : j.precision,
+        'lvl' : j.niveau,
+        'Objects' : j.objs,
+        'Usables' : j.usables}
+        with open('.tmp', 'w') as outfile:
+            dictionaryToJson = json.dump(playerStat, outfile)
         url = os.path.abspath(inspect.getfile(inspect.currentframe()))
         url = url[0:len(url)-9] + "2\index.htm"
         webbrowser.open(url,new=2)

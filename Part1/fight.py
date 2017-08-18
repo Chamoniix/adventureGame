@@ -45,7 +45,7 @@ class Fight:
             elif act == "u":
                 self.v.msg = "USE : " + str(self.j.usables)
             else:
-                v.msg = "Unknown command"
+                self.v.msg = "Unknown command"
 
 
 
