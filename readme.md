@@ -16,7 +16,7 @@ Just double click on app.bat ! Of course you could easily change some code prope
 > “C'est dans l'effort que l'on trouve la satisfaction et non dans la réussite. Un plein effort est une pleine victoire.”
 
 Then the commands are pretty simples, basically juste n, s, e, w, for North South East West, and few more but you can display the help anytime if you're lost.
-
+```
 > HELP :
 > Commands :
 >     + n : North
@@ -46,3 +46,4 @@ Then the commands are pretty simples, basically juste n, s, e, w, for North Sout
 >     + Grosse Armure : Une belle armure de chevalier (HP +25)
 >     + Bouclier      : Un authentique ecusson de chevalier (HP +20)
 >     + Masque        : Vous faites peur aux ennemis, ils vous attaquent de plus loin (AGRO +1)
+```
