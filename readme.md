@@ -33,6 +33,7 @@ Then the commands are pretty simples, basically juste n, s, e, w, for North Sout
 >     + . : Nothing
 >     + o : Hole
 >     + # : Object
+>     + ~ : Usable
 >     + @ : Ennemy
 > Objects :
 >     + Torche        : la salle s'eclaire (LIGT +1)

@@ -10,7 +10,7 @@ class View:
         self.isAgro = False
         self.event = ""
         self.upMsg = ""
-        self.cmd = ['n', 's', 'e', 'w', 'd', 'i', 't', 'h', 'u']
+        self.cmd = ['n', 's', 'e', 'w', 'd', 'i', 't', 'h', 'u', 'q']
         self.objDef = {"Torche" : "la salle s'eclaire (LIGT +1)",
         "Fireball" : "Une explosion de lumiere ! (LIGT +3)",
         "Epe en bois" : "Petite epe en bois, plus efficace sur scene qu'en combat (ATK +5)",
@@ -37,7 +37,8 @@ class View:
             clear()
             print ("Que voulez vous faire ?")
             print (" 1. Nouvelle Partie")
-            print (" 2. Quitter")
+            print (" 2. Charger")
+            print (" 3. Quitter")
             r = input("")
             if r in res:
                 break
@@ -75,7 +76,7 @@ class View:
         for i in range (0,j.map.size.y):
             l = "|"
             for k in range(0,j.map.size.x):
-                if (abs(j.x - k) + abs((j.map.size.y-1 - j.y) - i)) < j.light or j.map.shadow == True:
+                if (abs(j.x - k) + abs((j.map.size.y-1 - j.y) - i)) < j.light or j.map.shadow == False:
                     l=l+str(j.map.map[i][k])+" "
                 else:
                     l=l+"  "
