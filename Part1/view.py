@@ -75,7 +75,7 @@ class View:
         for i in range (0,j.map.size.y):
             l = "|"
             for k in range(0,j.map.size.x):
-                if (abs(j.x - k) + abs((j.map.size.y-1 - j.y) - i)) < j.light or j.map.shadow == False:
+                if (abs(j.x - k) + abs((j.map.size.y-1 - j.y) - i)) < j.light or j.map.shadow == True:
                     l=l+str(j.map.map[i][k])+" "
                 else:
                     l=l+"  "
@@ -261,6 +261,7 @@ class View:
         import random
         import time
         import webbrowser
+        import inspect
         def buildLine(txt):
             if len(txt) < 30:
                 chars = ['~','#','@']
@@ -309,8 +310,15 @@ class View:
                 input()
             else:
                 time.sleep(0.2)
-
-        url = "..\Part2\index.htm"
+        clear()
+        for j in range(0, len(line)-1):
+            if j == 8:
+                print("               Un gaz bizarre s'echappe de l'oeuf          ")
+            else:
+                print()
+        time.sleep(0.5)
+        url = os.path.abspath(inspect.getfile(inspect.currentframe()))
+        url = url[0:len(url)-9] + "2\index.htm"
         webbrowser.open(url,new=2)
 
     def lose(self, j):

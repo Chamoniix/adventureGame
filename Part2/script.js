@@ -8,23 +8,23 @@ $(document).ready(function(){
         $('#notif').prepend("<p>Stop</p>").slideDown();;
       }
       else if (nbClic == 8) {
-        $('#notif').prepend("<p>Please Stop </p>");
+        $('#notif').prepend("<p>Arrete !!</p>");
       }
-      else if (nbClic == 15) {
-        $('#notif').prepend("<p>Stop this !!</p>");
+      else if (nbClic == 13) {
+        $('#notif').prepend("<p>Ne fais pas ça... </p>");
       }
-      else if (nbClic == 30) {
-        $('#notif').prepend("<p>Can't you see the red sign ?</p>");
+      else if (nbClic == 18) {
+        $('#notif').prepend("<p>Tu vois pas le panneau rouge ?!</p>");
       }
-      else if (nbClic == 50) {
-        $('#notif').prepend("<p>Ok you won.... Keep going</p>");
+      else if (nbClic == 25) {
+        $('#notif').prepend("<p>Ok t'as gagné... Continue</p>");
         $('#egg').css({"cursor": "pointer"})
       }
-      else if (nbClic == 80) {
-        $('#notif').prepend("<p>Are you having fun ?</p>");
+      else if (nbClic == 60) {
+        $('#notif').prepend("<p>Tu t'amuse bien ?</p>");
       }
-      else if (nbClic == 150) {
-        $('#notif').prepend("<p>What's happenning ...?</p>");
+      else if (nbClic == 80) {
+        $('#notif').prepend("<p>Que ce passe-t-il..?</p>");
       }
 
     });
