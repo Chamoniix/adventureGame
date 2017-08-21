@@ -2,7 +2,7 @@
 
 ## What is it ?
 
-Adventure game is a quick small game in which you will have to explore a "cavern" / "cellar / "well" nobody really know. Legend sais that something really mysterious and powerful is waiting for you in the depths. You will have lot of surprises, objects to find, and monster to kill to explore this place, but hopefully the reward is worth it.
+Adventure game is a quick small game in which you will have to explore a "cavern" / "cellar / "well" nobody really knows. Legend sais that something really mysterious and powerful is waiting for you in the depths. You will have lot of surprises, objects to find, and monster to kill to explore this place, but hopefully the reward is worth it.
 
 ## What does it look like ?
 
