@@ -313,7 +313,7 @@ class View:
             else:
                 time.sleep(0.2)
         clear()
-        sleep(1)
+        time.sleep(1)
         for k in range(0, len(line)-1):
             if k == 8:
                 print("               Un gaz bizarre s'echappe de l'oeuf...          ")

@@ -20,11 +20,16 @@ $(document).ready(function(){
         $('#notif').prepend("<p>Ok t'as gagné... Continue</p>");
         $('#egg').css({"cursor": "pointer"})
       }
-      else if (nbClic == 60) {
+      else if (nbClic == 50) {
         $('#notif').prepend("<p>Tu t'amuse bien ?</p>");
       }
-      else if (nbClic == 80) {
+      else if (nbClic == 70) {
         $('#notif').prepend("<p>Que ce passe-t-il..?</p>");
+        setTimeout(function() {
+        $('#notif').css('opacity', '0')
+        $('#oeuf').css('opacity', '0')
+        document.location.href = "base.html";
+      }, 1000);
       }
 
     });

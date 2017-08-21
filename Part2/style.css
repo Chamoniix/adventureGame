@@ -17,6 +17,7 @@ body, html {
   width: 30%;
   margin-left: 50%;
   cursor: not-allowed;
+  transition: 1s;
 }
 
 #notif {
@@ -25,6 +26,7 @@ body, html {
   display: inline-block;
   height: 80%;
   overflow: hidden;
+  transition: 1s;
 }
 
 #notif P {
@@ -33,4 +35,11 @@ body, html {
   margin-top: 30px;
   font-family: sans-serif;
   font-size: 20px;
+}
+
+#blocpage {
+  width: 80%;
+  margin: auto;
+  border: solid black 1px;
+  text-align: center;
 }
