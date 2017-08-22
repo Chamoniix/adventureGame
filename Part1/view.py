@@ -67,7 +67,7 @@ class View:
         print ("################# ", j.name, " #################")
         print ("  + HP         : ", j.hp, "/", j.hpMax)
         print ("  + Attack     : ", j.attack)
-        print ("  + precision : ", j.precision)
+        print ("  + precision  : ", j.precision)
         print ("  + Niveau     : ", j.niveau)
         print ("  + Experience : ", strExp)
         print ("  + Equipement : ", j.objs)
@@ -319,10 +319,11 @@ class View:
                 print("               Un gaz bizarre s'echappe de l'oeuf...          ")
             else:
                 print()
-        playerStat = {'hpMax' : j.hpMax,
+        playerStat = {'name' : j.name,
+        'hpMax' : j.hpMax,
         'hp' : j.hp,
         'attack'  : j.attack,
-        'precesion' : j.precision,
+        'precision' : j.precision,
         'lvl' : j.niveau,
         'Objects' : j.objs,
         'Usables' : j.usables}
