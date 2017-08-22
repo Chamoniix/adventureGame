@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 
 $sql = "INSERT INTO Board (name, score)
-VALUES ('{$_POST["name"]}','{$_POST["score"]}')";
+VALUES ('".$_POST["name"]. "','".$_POST["score"]."')";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
