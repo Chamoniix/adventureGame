@@ -29,6 +29,7 @@ Then the commands are pretty simples, basically juste n, s, e, w, for North Sout
 >     + u : use
 >     + f : fight
 >     + r : run
+>     + q : quit and save
 > Map :
 >     + . : Nothing
 >     + o : Hole
