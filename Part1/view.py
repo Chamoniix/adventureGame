@@ -258,7 +258,7 @@ class View:
 
 
 
-    def win(self, j):
+    def printWin(self, j):
         import random
         import time
         import webbrowser
@@ -319,20 +319,11 @@ class View:
                 print("               Un gaz bizarre s'echappe de l'oeuf...          ")
             else:
                 print()
-        playerStat = {'hpMax' : j.hpMax,
-        'hp' : j.hp,
-        'attack'  : j.attack,
-        'precesion' : j.precision,
-        'lvl' : j.niveau,
-        'Objects' : j.objs,
-        'Usables' : j.usables}
-        with open('.tmp', 'w') as outfile:
-            dictionaryToJson = json.dump(playerStat, outfile)
         url = os.path.abspath(inspect.getfile(inspect.currentframe()))
         url = url[0:len(url)-9] + "2\index.htm"
         webbrowser.open(url,new=2)
 
-    def lose(self, j):
+    def printLose(self, j):
         clear()
         print("nul.")
         input()

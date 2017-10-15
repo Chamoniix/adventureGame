@@ -268,6 +268,8 @@ class Joueur:
             return 0
         else:
             return -1
+    def end(self, wl):
+        
 
 # tests
 if __name__ == "__main__":
